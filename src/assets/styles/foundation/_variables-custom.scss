@@ -17,14 +17,12 @@
 
     /* === フォント設定 === */
     /* 日本語フォント */
-    --font-jp: 'Kaisei Decol',
+    --font-jp: 'Noto Sans JP',
         serif;
     /* 英語フォント（英字・飾りなど） */
-    --font-en: 'Outfit',
-        cursive;
+    --font-en:'Intel One Mono', monospace;
     /* ロゴ専用フォント */
-    --font-logo: 'さわらびゴシック',
-        serif;
+    --font-logo:'Intel One Mono', monospace;
 
     /* === フォントサイズ（可変 / 基準：1440px） === */
     /* xs: 0.75rem〜0.875rem（12px〜14px） */
