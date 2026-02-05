@@ -7,8 +7,37 @@
 
 
 .main-panel {
-    .daily-todo {
+    .stock-item.is-done {
+        opacity: .5;
+    }
 
+    .stock-item.is-done .stock-label {
+        text-decoration: line-through;
+    }
+
+    .stock-actions {
+        width: 2rem;
+    }
+
+    .stock-clear {
+        opacity: .7;
+    }
+
+    .stock-clear:disabled {
+        opacity: .3;
+        pointer-events: none;
+    }
+
+
+    .todo-item.is-done {
+        opacity: .5;
+    }
+
+    .todo-item.is-done span {
+        text-decoration: line-through;
+    }
+
+    .daily-todo {
 
         .memo__move {
             background: #e6f4ea;

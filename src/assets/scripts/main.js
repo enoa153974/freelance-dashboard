@@ -45,7 +45,9 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     initStockTodo({
         listEl: document.getElementById('stock-list'),
-        storageKey: 'stock-todo'
+        clearDoneBtn: document.getElementById('clear-done-stock'),
+        storageKey: 'stock-todo',
+        dailyKey: 'daily-todo'
     });
     initNav();
 });
