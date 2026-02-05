@@ -1,4 +1,3 @@
-
 /* === Color Utilities === */
 .color-main {
     color: var(--main-color);
@@ -12,6 +11,10 @@
     color: var(--accent-color);
 }
 
+.color-text{
+    color: var(--text-color);
+}
+
 .color-text-sub {
     color: var(--text-color-sub);
 }
@@ -23,6 +26,7 @@
 .bg-main {
     background-color: var(--main-color);
 }
+
 .bg-sub {
     background-color: var(--sub-color);
 }

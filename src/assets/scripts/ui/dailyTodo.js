@@ -2,6 +2,8 @@
 // 「本日のやること（Daily Todo）」を管理するモジュール
 // 追加・完了管理・未達成を Stock に送る役割を持つ
 
+import { getToday } from '../utils/date.js';
+import { getCurrentTimerSeconds, resetTimer } from '../utils/time.js';
 // Daily / Stock 間の更新同期に使うカスタムイベント名
 const TODO_UPDATE_EVENT = 'todo:updated';
 
@@ -15,6 +17,7 @@ const TODO_UPDATE_EVENT = 'todo:updated';
  * @param {string} storageKey - localStorage のキー（Daily 側）
  * @param {string} stockKey - localStorage のキー（Stock 側）
  */
+
 export function initDailyTodo({
     listEl,
     formEl,
@@ -59,7 +62,8 @@ export function initDailyTodo({
         todos.push({
             id: `t-${Date.now()}`,
             label: text,
-            done: false
+            done: false,
+            completedAt: null
         });
 
         save();
@@ -90,7 +94,8 @@ export function initDailyTodo({
             stockTodos.push({
                 id: `s-${Date.now()}-${todo.id}`,
                 label: todo.label,
-                done: false
+                done: false,
+                completedAt: null
             });
         });
 
@@ -131,10 +136,28 @@ export function initDailyTodo({
 
             // 完了チェック（チェックしても消えない）
             li.querySelector('input').addEventListener('change', e => {
-                todo.done = e.target.checked;
+                const checked = e.target.checked;
+
+                if (checked) {
+                    todo.done = true;
+                    todo.completedAt = getToday();
+                    todo.workTime = getCurrentTimerSeconds();
+
+                    // タイマーを自動リセット
+                    resetTimer();
+                } else {
+                    // やり直し
+                    todo.done = false;
+                    todo.completedAt = null;
+                    todo.workTime = null;
+                }
+
                 save();
                 render();
+
+                window.dispatchEvent(new CustomEvent('todo:updated'));
             });
+
 
             listEl.appendChild(li);
         });

@@ -1,26 +1,35 @@
 <div class="main-panel l-row l-row--gap l-inner bg-color py-8 px-4 sm:py-6">
 
 
-    <div class="left-panel l-column l-column--3">
+    <div class="left-panel l-column l-column--4 flex flex-col">
         <section class="stock-panel px-4 py-4 bg-sub color-text-sub">
             <div class="flex justify-between">
-                <h3 clasS="en">Incomplete Tasks</h3>
+                <h3 clasS="en"><i class="fas fa-xmark mr-2 color-text"></i>Incomplete Tasks</h3>
                 <button id="clear-done-stock" class="stock-clear color-text-sub">
                     完了済みを削除
                 </button>
             </div>
             <ul id="stock-list" class="py-2"></ul>
         </section>
+
+        <section class="today-log px-4 py-4 bg-sub color-text-sub mt-4">
+            <h3 class="en"><i class="fas fa-circle-check mr-2  color-text"></i>Completed Tasks</h3>
+            <ul id="today-log-list"></ul>
+            <div class="today-summary mt-4 flex justify-end items-center">
+                <i class="fas fa-stopwatch mr-2"></i>今日の作業時間：
+                <span id="today-total-time">0秒</span>
+            </div>
+        </section>
     </div>
 
-    <div class="right-panel l-column l-column--9 flex flex-col">
+    <div class="right-panel l-column l-column--8 flex flex-col">
         {{!-- パネル上部 --}}
         <div class="l-row l-row--gap">
             <div class=" l-column l-column--8 bg-sub">
 
                 {{!-- メモ表示部 --}}
                 <div class="daily-todo py-4 px-4" aria-live="polite">
-                    <h3 class="color-text-sub en">Daily TODO</h3>
+                    <h3 class="color-text-sub en"><i class="fas fa-calendar-day mr-2 color-text"></i>Daily TODO</h3>
                     <ul id="daily-list" class="color-text-sub"></ul>
                     <div class="flex justify-end">
                         <button type="button" id="move-to-stock" class="memo__move py-4 px-4 mt-2 rounded color-text">
@@ -39,9 +48,14 @@
                 <div class="control-btn">
 
                 </div>
-                <div class="timer">
+                <div class="work-timer bg-accent">
+                    <div id="timer-display">0秒</div>
 
+                    <button id="timer-start">▶</button>
+                    <button id="timer-stop">⏸</button>
+                    <button id="timer-reset">⏹</button>
                 </div>
+
             </div>
         </div>
 

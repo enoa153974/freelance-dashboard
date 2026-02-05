@@ -3,6 +3,8 @@
 // Daily から送られてきたタスクを保持し、完了・戻す・一括削除を担当
 
 import { addToDailyTodo } from './dailyTodo.js';
+import { getToday } from '../utils/date.js';
+import { getCurrentTimerSeconds, resetTimer } from '../utils/time.js';
 
 /**
  * Stock Todo 初期化
@@ -121,10 +123,26 @@ export function initStockTodo({
             /* --- 完了チェック --- */
             // チェックしてもその場には残る（見た目だけ変わる）
             li.querySelector('.stock-done').addEventListener('change', e => {
-                todo.done = e.target.checked;
+                const checked = e.target.checked;
+
+                if (checked) {
+                    todo.done = true;
+                    todo.completedAt = getToday();
+                    todo.workTime = getCurrentTimerSeconds();
+
+                    resetTimer();
+                } else {
+                    todo.done = false;
+                    todo.completedAt = null;
+                    todo.workTime = null;
+                }
+
                 save();
                 render();
+
+                window.dispatchEvent(new CustomEvent('todo:updated'));
             });
+
 
             listEl.appendChild(li);
         });

@@ -14,6 +14,8 @@ import { initWeather } from './ui/weather.js';
 import { initGarbage } from './ui/garbage.js';
 import { initDailyTodo } from './ui/dailyTodo.js';
 import { initStockTodo } from './ui/stockTodo.js';
+import { initTodayLog } from './ui/todayLog.js';
+import { initWorkTimer } from './utils/time.js';
 import { initNav } from './ui/nav.js';
 
 
@@ -43,11 +45,26 @@ window.addEventListener('DOMContentLoaded', () => {
         storageKey: 'daily-todo',
         stockKey: 'stock-todo'
     });
+
     initStockTodo({
         listEl: document.getElementById('stock-list'),
         clearDoneBtn: document.getElementById('clear-done-stock'),
         storageKey: 'stock-todo',
         dailyKey: 'daily-todo'
     });
+
+
+    initTodayLog({
+        listEl: document.getElementById('today-log-list'),
+        totalEl: document.getElementById('today-total-time')
+    });
+
+    initWorkTimer({
+        displayEl: document.getElementById('timer-display'),
+        startBtn: document.getElementById('timer-start'),
+        stopBtn: document.getElementById('timer-stop'),
+        resetBtn: document.getElementById('timer-reset')
+    });
+
     initNav();
 });
