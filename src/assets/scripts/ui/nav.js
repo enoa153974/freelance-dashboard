@@ -1,8 +1,3 @@
-/**
- * nav.js
- *
- * 家族ページへの遷移ロジック
- */
 
 /**
  * nav.js
@@ -11,7 +6,7 @@
  */
 
 export function initNav() {
-    // 家族ページ遷移
+    // 任意のページに移管する関数
     const pageButtons = document.querySelectorAll('.nav-btn[data-page]');
     pageButtons.forEach((btn) => {
         btn.addEventListener('click', () => {
