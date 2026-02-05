@@ -25,9 +25,9 @@
     <div class="right-panel l-column l-column--8 flex flex-col">
         {{!-- パネル上部 --}}
         <div class="l-row l-row--gap">
-            <div class=" l-column l-column--8 bg-sub">
 
-                {{!-- メモ表示部 --}}
+            {{!-- daily TODO --}}
+            <div class=" l-column l-column--8 bg-sub">
                 <div class="daily-todo py-4 px-4" aria-live="polite">
                     <h3 class="color-text-sub en"><i class="fas fa-calendar-day mr-2 color-text"></i>Daily TODO</h3>
                     <ul id="daily-list" class="color-text-sub"></ul>
@@ -37,32 +37,30 @@
                         </button>
                     </div>
                 </div>
-
-
             </div>
 
 
             {{!-- 作業コントロールパネル --}}
             <div class="bg-sub l-column l-column--4 px-4 py-4">
-                <h3 class="color-text-sub en">Task Controls</h3>
-                <div class="control-btn">
+                <h3 class="color-text-sub en"><i class="fas fa-hourglass-half color-text mr-2"></i>Task Controls</h3>
+                {{!-- 作業計測タイマー --}}
+                <div class="work-timer bg-accent py-4 px-4 rounded">
+                    <div id="timer-display" class="timer__display text-center en font-bold">0秒</div>
 
-                </div>
-                <div class="work-timer bg-accent">
-                    <div id="timer-display">0秒</div>
-
-                    <button id="timer-start">▶</button>
-                    <button id="timer-stop">⏸</button>
-                    <button id="timer-reset">⏹</button>
+                    <div class="l-row l-row--gap justify-center">
+                        <button id="timer-start" class="timer__btn">▶</button>
+                        <button id="timer-stop" class="timer__btn">⏸</button>
+                        <button id="timer-reset" class="timer__btn">⏹</button>
+                    </div>
                 </div>
 
             </div>
         </div>
 
         {{!-- パネル下部 --}}
-        <section class="home-info card bg-sub mt-4">
+        <section class="memo-info card bg-sub mt-4">
 
-            <div class="home-info__grid">
+            <div class="memo-info__grid">
                 {{!--メモ欄 --}}
                 <section class="memo l-row l-row--gap" aria-label="メモ・アイデア・ログ">
                     {{!-- インプット入力フォーム --}}

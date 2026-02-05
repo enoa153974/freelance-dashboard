@@ -7,47 +7,62 @@
 
 
 .main-panel {
-    .stock-item.is-done {
-        opacity: .5;
-    }
+    //左側パネル【未達成タスク・完了タスク】
+    .left-panel {
 
-    .stock-item.is-done .stock-label {
-        text-decoration: line-through;
-    }
+        //未達成タスクパネル
+        .stock-item.is-done {
+            opacity: .5;
+        }
 
-    .stock-actions {
-        width: 2rem;
-    }
+        .stock-item.is-done .stock-label {
+            text-decoration: line-through;
+        }
 
-    .stock-clear {
-        opacity: .7;
-    }
+        .stock-actions {
+            width: 2rem;
+        }
 
-    .stock-clear:disabled {
-        opacity: .3;
-        pointer-events: none;
-    }
+        .stock-clear {
+            opacity: .7;
+        }
 
-
-    .todo-item.is-done {
-        opacity: .5;
-    }
-
-    .todo-item.is-done span {
-        text-decoration: line-through;
-    }
-
-    .daily-todo {
-
-        .memo__move {
-            background: #e6f4ea;
-            color: var(--sub-main);
-            font-size: var(--font-size-xl);
+        .stock-clear:disabled {
+            opacity: .3;
+            pointer-events: none;
         }
     }
 
-    .home-info {
-        border: solid var(--sub-color);
+    //右パネル【dailyTODO・タスクコントロール・メモinfo】
+    .right-panel {
+
+        //dailyTODOパネル
+        .daily-todo {
+            .todo-item.is-done {
+                opacity: .5;
+            }
+
+            .todo-item.is-done span {
+                text-decoration: line-through;
+            }
+
+            //メモを未達成パネルに移動するボタン【＜】
+            .memo__move {
+                background: #e6f4ea;
+                color: var(--sub-main);
+                font-size: var(--font-size-xl);
+            }
+        }
+
+        //作業計測タイマー
+        .timer__display{
+            font-size: var(--font-size-2xl);
+        }
+        .timer__btn{
+            padding: .5rem;
+            background-color: #e6f4ea;
+            border-radius: 5px;
+        }
 
         .memo {
             @include media-query(sm) {
