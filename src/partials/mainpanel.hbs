@@ -1,29 +1,32 @@
-<div class="main-panel l-row l-row--gap l-inner bg-color pt-8 px-4 sm:py-6">
+<div class="main-panel l-row l-row--gap l-inner bg-color py-8 px-4 sm:py-6">
 
 
     <div class="left-panel l-column l-column--3">
-        <section class="stock-panel">
+        <section class="stock-panel px-4 py-4 bg-sub color-text-sub">
             <div class="flex justify-between">
                 <h3>未達成タスク</h3>
-                <button id="clear-done-stock" class="stock-clear">
+                <button id="clear-done-stock" class="stock-clear color-text-sub">
                     完了済みを削除
                 </button>
             </div>
-            <ul id="stock-list"></ul>
+            <ul id="stock-list" class="py-2"></ul>
         </section>
     </div>
 
     <div class="right-panel l-column l-column--9 flex flex-col">
         {{!-- パネル上部 --}}
         <div class="l-row l-row--gap">
-            <div class=" l-column l-column--8 bg-accent">
+            <div class=" l-column l-column--8 bg-sub">
 
                 {{!-- メモ表示部 --}}
                 <div class="daily-todo py-4 px-4" aria-live="polite">
-                    <p class="memo__preview-label">本日のやること</p>
-                    <ul id="daily-list"></ul>
-                    <button type="button" id="move-to-stock" class="memo__move py-4 px-4 rounded"><i
-                            class="fa-solid fa-chevron-left"></i></button>
+                    <h3 class="color-text-sub">本日のやること</h3>
+                    <ul id="daily-list" class="color-text-sub"></ul>
+                    <div class="flex justify-end">
+                        <button type="button" id="move-to-stock" class="memo__move py-4 px-4 mt-2 rounded color-text">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                    </div>
                 </div>
 
 
@@ -31,8 +34,8 @@
 
 
             {{!-- 作業コントロールパネル --}}
-            <div class="bg-sub l-column l-column--4">
-                <h3>作業コントロール</h3>
+            <div class="bg-sub l-column l-column--4 px-4 py-4">
+                <h3 class="color-text-sub">作業コントロール</h3>
                 <div class="control-btn">
 
                 </div>
@@ -43,13 +46,13 @@
         </div>
 
         {{!-- パネル下部 --}}
-        <section class="home-info card rounded-lg bg-accent mt-4">
+        <section class="home-info card rounded-lg bg-sub mt-4">
 
             <div class="home-info__grid">
                 {{!--メモ欄 --}}
                 <section class="memo l-row l-row--gap" aria-label="メモ・アイデア・ログ">
                     {{!-- インプット入力フォーム --}}
-                    <form id="memo-form" class="memo__form l-column l-column--3 py-4 px-4">
+                    <form id="memo-form" class="memo__form l-column l-column--6 py-4 px-4">
                         <textarea id="memo-input" class="memo__input w-full" rows="3" maxlength="120"
                             placeholder="今日やることを追加"></textarea>
 
@@ -61,6 +64,10 @@
                                     class="fa-solid fa-trash"></i></button>
                         </div>
                     </form>
+
+                    <div class="l-column l-column--6 py-4 px-4">
+
+                    </div>
 
 
                 </section>
