@@ -4,8 +4,15 @@
             <!-- メニュー -->
             <!-- PCナビ -->
             <nav class="header__nav pc-nav l-row l-row--gap">
-                <h1 class="l-column l-column--3">かけいぼ！！</h1>
-                <ul class="header__nav-inner l-row items-center font-bold l-column l-column--9 l-row l-row--gap">
+
+                {{!-- 時計表示 --}}
+                <section class="clock-area l-column l-column--4 flex items-center font-bold ">
+                    <div id="date" class="date en font-semibold text-center">---- --/--</div>
+                    <div id="clock" class="clock en text-center pl-4">00:00</div>
+
+                </section>
+
+                <ul class="header__nav-inner l-row items-center font-bold l-column l-column--8 l-row l-row--gap">
                     <li class="header__text l-column l-column--3">
                         <a href="">sample</a>
                     </li>
@@ -30,7 +37,7 @@
             </button>
 
             <!-- スマホナビ -->
-            <nav id="global-nav" class="sp-nav font-bold">
+            <nav id="global-nav" class="sp-nav font-bold hidden">
                 <ul>
                     <li><a href="/">トップ</a></li>
                     <li> <a href="">sample</a></li>

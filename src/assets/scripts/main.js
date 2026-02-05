@@ -12,7 +12,8 @@ import '../styles/style.scss';
 import { initClock } from './ui/clock.js';
 import { initWeather } from './ui/weather.js';
 import { initGarbage } from './ui/garbage.js';
-import { initMemo } from './ui/memo.js';
+import { initDailyTodo } from './ui/dailyTodo.js';
+import { initStockTodo } from './ui/stockTodo.js';
 import { initNav } from './ui/nav.js';
 
 
@@ -33,6 +34,18 @@ window.addEventListener('DOMContentLoaded', () => {
     initClock();
     initWeather();
     initGarbage();
-    initMemo();
+    initDailyTodo({
+        listEl: document.getElementById('daily-list'),
+        formEl: document.getElementById('memo-form'),
+        inputEl: document.getElementById('memo-input'),
+        clearBtn: document.getElementById('memo-clear'),
+        moveBtn: document.getElementById('move-to-stock'),
+        storageKey: 'daily-todo',
+        stockKey: 'stock-todo'
+    });
+    initStockTodo({
+        listEl: document.getElementById('stock-list'),
+        storageKey: 'stock-todo'
+    });
     initNav();
 });

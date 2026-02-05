@@ -1,6 +1,6 @@
 @use '../../foundation/import' as *;
 
-/* TOPページ以外のヘッダーのデザイン */
+/* ヘッダーのデザイン */
 .header__container {
     height: var(--header-height);
     padding: 0;
@@ -8,23 +8,44 @@
     @include media-query(md) {
         height: var(--sp-header-height);
     }
-        .header__nav{
 
-            @include media-query(md) {
-                display: none;
-            }
-        }
-    }
-
-    .hamburger {
-        display: none;
-        margin-left: auto;
+    .header__nav {
 
         @include media-query(md) {
-            display: flex;
+            display: none;
         }
     }
+}
 
-    .sp-nav {
-        color: var(--text-color);
+@include media-query(lg) {
+    .l-row {
+        flex-direction: column;
+        gap: 1rem;
     }
+
+    .l-column--8,
+    .l-column--4 {
+        width: 100%;
+    }
+}
+
+.clock {
+    font-size: var(--font-size-4xl);
+}
+
+.date {
+    font-size: var(--font-size-base);
+}
+
+.hamburger {
+    display: none;
+    margin-left: auto;
+
+    @include media-query(md) {
+        display: flex;
+    }
+}
+
+.sp-nav {
+    color: var(--text-color);
+}

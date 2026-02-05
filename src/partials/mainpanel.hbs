@@ -1,32 +1,52 @@
-<div class="main-panel l-inner bg-color pt-8 px-4 sm:py-6">
-    <div class="flex flex-col sm:flex-col">
+<div class="main-panel l-row l-row--gap l-inner bg-color pt-8 px-4 sm:py-6">
+
+
+    <div class="left-panel l-column l-column--3">
+        <section class="stock-panel">
+            <h3>未達成タスク</h3>
+            <ul id="stock-list"></ul>
+        </section>
+    </div>
+
+    <div class="right-panel l-column l-column--9 flex flex-col">
         {{!-- パネル上部 --}}
         <div class="l-row l-row--gap">
-            {{!-- 時計表示 --}}
-            <section class="clock-area l-column l-column--8 bg-sub font-bold rounded-lg ">
-                <div id="clock" class="clock en px-12 text-center">00:00</div>
-                <div id="date" class="date en font-semibold px-12 text-center">---- --/--</div>
-            </section>
+            <div class=" l-column l-column--8 bg-accent">
 
-            {{!-- 空白パネル --}}
-            <div class="bg-sub">仮</div>
+                {{!-- メモ表示部 --}}
+                <div class="daily-todo py-4 px-4" aria-live="polite">
+                    <p class="memo__preview-label">本日のやること</p>
+                    <ul id="daily-list"></ul>
+                    <button type="button" id="move-to-stock" class="memo__move py-4 px-4 rounded"><i
+                            class="fa-solid fa-chevron-left"></i></button>
+                </div>
+
+
+            </div>
+
+
+            {{!-- 作業コントロールパネル --}}
+            <div class="bg-sub l-column l-column--4">
+                <h3>作業コントロール</h3>
+                <div class="control-btn">
+
+                </div>
+                <div class="timer">
+
+                </div>
+            </div>
         </div>
-
 
         {{!-- パネル下部 --}}
         <section class="home-info card rounded-lg bg-accent mt-4">
-            <div class="home-info__grid">
-                {{!-- メッセージ表示部分・あとからクラス名等整理 --}}
-                <section class="garbage bg-sub rounded-t py-2 px-4" aria-label="ゴミの日">
-                    <p id="garbage-comment" class="garbage__comment font-bold">今日はゴミの日です</p>
-                </section>
 
-                {{!-- 一言伝言メモ欄 --}}
-                <section class="memo l-row l-row--gap" aria-label="家族への一言メモ">
+            <div class="home-info__grid">
+                {{!--メモ欄 --}}
+                <section class="memo l-row l-row--gap" aria-label="メモ・アイデア・ログ">
                     {{!-- インプット入力フォーム --}}
                     <form id="memo-form" class="memo__form l-column l-column--3 py-4 px-4">
                         <textarea id="memo-input" class="memo__input w-full" rows="3" maxlength="120"
-                            placeholder="メモを入力"></textarea>
+                            placeholder="今日やることを追加"></textarea>
 
                         {{!-- 保存ボタンと削除ボタン --}}
                         <div class="memo__actions">
@@ -38,14 +58,10 @@
                     </form>
 
 
-                    {{!-- メモ表示部 --}}
-                    <div class="memo__preview l-column l-column--9 py-4 px-4" aria-live="polite">
-                        <p class="memo__preview-label">本日のやること</p>
-                        <p id="memo-display" class="memo__display">メモがありません</p>
-                    </div>
                 </section>
             </div>
         </section>
 
     </div>
+
 </div>
