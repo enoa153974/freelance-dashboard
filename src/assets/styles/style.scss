@@ -1,0 +1,65 @@
+/* -------------------------------
+ *  file import (base)
+ * ---------------------------- */
+/* 共通スタイル */
+@use 'base/global';
+/* リセットcss */
+@use 'base/reset';
+
+/* -------------------------------
+ *  file import (foundation)
+ * ---------------------------- */
+/* faundation内のファイルをまとめてインポート */
+@use 'foundation/import' as *;
+
+/* -------------------------------
+ *  file import (layout)
+ * ---------------------------- */
+/* レイアウト（構造用のクラス） */
+@use 'layout/module';
+
+/* -------------------------------
+ *  file import (components/common)
+ * ---------------------------- */
+@use 'components/common/header';
+@use 'components/common/footer';
+/* -------------------------------
+ *  file import (components/section)
+ * ---------------------------- */
+@use 'components/sections/main-panel';
+@use 'components/sections/table-panel';
+@use 'components/sections/tool-panel';
+@use 'components/sections/yuuma-page';
+@use 'components/sections/sota-page';
+@use 'components/sections/asha-page';
+/* -------------------------------
+ *  file import (components/ui)
+ * ---------------------------- */
+/* ハンバーガーメニューcss */
+@use 'components/ui/stamp-panel';
+/* アコーディオンメニューcss/デザイン-base */
+/* @use 'components/ui/accordion'; */
+/* スライダー（カルーセル）css */
+@use 'components/ui/gallery-slider';
+/* パンくずリストのcss */
+@use 'components/ui/breadcrumb';
+
+/* -------------------------------
+ *  file import (utility)
+ * ---------------------------- */
+/* ユーティリティクラス */
+@use 'utility/utilities';
+/* ボタンのベースデザイン */
+@use 'utility/button';
+/* ボタンの上書きデザイン */
+@use 'utility/button-overrides';
+/* marginクラス */
+@use 'utility/margin';
+/* paddingクラス */
+@use 'utility/padding';
+/* 装飾用クラス */
+@use 'utility/decoration';
+/* カラークラス */
+@use 'utility/color';
+/* フォントクラス */
+@use 'utility/font';

@@ -1,0 +1,225 @@
+@use '../../foundation/import.scss' as *;
+
+/* ページ全体レイアウト */
+.yuuma-page {
+    overflow: hidden;
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 1rem;
+    font-family: "Zen Maru Gothic", system-ui, sans-serif;
+
+
+    /* ページヘッダー */
+    .page-header {
+
+
+        .page-title {
+            font-size: var(--font-size-xl);
+            margin: 0;
+        }
+
+        .page-title i {
+            margin-right: 0.05em;
+        }
+
+        .page-subtitle {
+            margin-top: .25rem;
+            font-size: var(--font-size-lg);
+        }
+
+        .btn--back {
+            font-size: var(--font-size-xl);
+        }
+    }
+
+    /* メイン横並び3カラム */
+    .page-main {
+        display: grid;
+        grid-template-columns: 1.2fr 1.5fr 1fr;
+        gap: 1rem;
+        min-height: 0;
+
+        @include media-query(lg) {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 1fr auto;
+            gap: 1rem;
+        }
+    }
+
+    /* 各カード */
+    .card {
+        border-radius: .75rem;
+        padding: .75rem 1rem;
+        box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .05);
+
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        margin: 0 0 .5rem;
+        gap: .5rem;
+    }
+
+    .card-subtitle {
+        font-size: 1.25rem;
+        margin: .75rem 0 .25rem;
+    }
+
+
+    .schedule__list,
+    .belongings__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .schedule__list li,
+    .belongings__list li {
+        padding: .25rem 0;
+    }
+
+
+    .tasks__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: .5rem;
+    }
+
+    .task {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        padding: .5rem;
+        border-radius: .5rem;
+        background: #f6f7f6;
+        cursor: pointer;
+    }
+
+    .task__icon {
+        font-size: 1.4rem;
+    }
+
+    .task__label {
+        flex: 1;
+        font-size: 1.1rem;
+    }
+
+    .hanamaru {
+        width: 2.4rem;
+        height: 2.4rem;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        opacity: 0;
+        transform: scale(.6);
+        transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .hanamaru img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .task.is-done .hanamaru {
+        animation: pop .25s ease;
+    }
+
+    @keyframes pop {
+        0% {
+            transform: scale(.6);
+        }
+
+        60% {
+            transform: scale(1.15);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .task.is-done {
+        opacity: .6;
+    }
+
+    .task.is-done .hanamaru {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .task {
+        touch-action: none;
+        user-select: none;
+        cursor: grab;
+    }
+
+    .task.is-dragging {
+        cursor: grabbing;
+        opacity: .6;
+    }
+
+    /* 追加やること：全リセット */
+    .btn--reset {
+        margin-top: .5rem;
+        align-self: flex-end;
+
+        background: transparent;
+        border: 1px dashed #ccc;
+        border-radius: .5rem;
+        padding: .3rem .6rem;
+
+        font-size: .9rem;
+        color: #888;
+        cursor: pointer;
+    }
+
+    .btn--reset:hover {
+        border-color: #d66;
+        color: #d66;
+    }
+
+
+    .message__list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 .5rem;
+        display: grid;
+        gap: .4rem;
+    }
+
+    .message__list li {
+        background: #f2f2f2;
+        border-radius: .5rem;
+        padding: .4rem .5rem;
+        font-size: 1rem;
+    }
+
+
+    .message__form {
+        display: flex;
+        gap: .25rem;
+    }
+
+    .message__form input {
+        flex: 1;
+        font-size: 1rem;
+        padding: .4rem;
+        border-radius: .4rem;
+        border: 1px solid #ccc;
+    }
+
+    .message__form button {
+        padding: .4rem .6rem;
+    }
+
+
+}

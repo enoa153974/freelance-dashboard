@@ -1,0 +1,30 @@
+@use '../../foundation/import' as *;
+
+/* TOPページ以外のヘッダーのデザイン */
+.header__container {
+    height: var(--header-height);
+    padding: 0;
+
+    @include media-query(md) {
+        height: var(--sp-header-height);
+    }
+        .header__nav{
+
+            @include media-query(md) {
+                display: none;
+            }
+        }
+    }
+
+    .hamburger {
+        display: none;
+        margin-left: auto;
+
+        @include media-query(md) {
+            display: flex;
+        }
+    }
+
+    .sp-nav {
+        color: var(--text-color);
+    }

@@ -1,0 +1,25 @@
+{
+  "name": "house-dashboard-pwa",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "packageManager": "pnpm@10.28.1",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "rollup": "^4.56.0",
+    "sass": "^1.89.2",
+    "vite": "^7.3.1",
+    "vite-plugin-handlebars": "^2.0.0"
+  },
+  "dependencies": {
+    "firebase": "^12.7.0",
+    "jquery": "^3.7.1"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}

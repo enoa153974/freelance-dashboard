@@ -1,0 +1,303 @@
+/* === ユーティリティクラス === */
+
+/* === Width Utilities === */
+.w-full {
+    width: 100%;
+}
+
+.w-harf {
+    width: 50%;
+}
+
+.max-w-4xl {
+    max-width: 1024px;
+}
+
+/* === Flex & Alignment === */
+.flex {
+    display: flex;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.flex-col-reverse {
+    flex-direction: column-reverse;
+}
+
+.flex-reverse {
+    flex-direction: row-reverse;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+
+.justify-stretch {
+    justify-content: stretch;
+}
+
+/* === Position Utilities === */
+.position-relative {
+    position: relative;
+}
+
+.position-absolute {
+    position: absolute;
+}
+
+.position-fixed {
+    position: fixed;
+}
+
+.position-sticky {
+    position: sticky;
+}
+
+.top-0 {
+    top: 0;
+}
+
+.top-50p {
+    top: 50%;
+}
+
+.left-50p {
+    left: 50%;
+}
+
+.right-50p {
+    right: 50%;
+}
+
+.z-10 {
+    z-index: 10;
+}
+
+.translate-center {
+    transform: translate(-50%, -50%);
+}
+
+.objpos-center {
+    object-position: center;
+}
+
+.objpos-top {
+    object-position: top;
+}
+
+.objpos-bottom {
+    object-position: bottom;
+}
+
+.objpos-left {
+    object-position: left;
+}
+
+.objpos-right {
+    object-position: right;
+}
+
+.objpos-top-center {
+    object-position: center top;
+}
+
+.objpos-bottom-center {
+    object-position: center bottom;
+}
+
+
+/* === Display Utilities === */
+.hidden {
+    display: none;
+}
+
+.block {
+    display: block;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+/* === Border Radius === */
+.rounded {
+    border-radius: var(--radius);
+}
+
+.rounded-lg {
+    border-radius: var(--radius-lg);
+}
+
+.rounded-t {
+    border-top-left-radius: var(--radius);
+    border-top-right-radius: var(--radius);
+}
+
+.rounded-b {
+    border-bottom-left-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+}
+
+.rounded-l {
+    border-top-left-radius: var(--radius);
+    border-bottom-left-radius: var(--radius);
+}
+
+.rounded-r {
+    border-top-right-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+}
+
+/* === Utility for line break === */
+.break {
+    display: block;
+    width: 100%;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    clear: both;
+}
+
+.multi-line-text {
+    white-space: pre-line;
+}
+
+/* 状態クラス */
+
+/* 表示 */
+.is-hidden {
+    display: none !important;
+}
+.is-visible {}
+
+/* 有効・無効 */
+.is-disabled {
+    pointer-events: none;
+}
+.is-enabled {}
+
+/* UI状態 */
+.is-active {}
+.is-open {}
+.is-closed {}
+.is-selected {}
+.is-current {}
+
+/* 進行・処理 */
+.is-loading {}
+.is-loaded {}
+.is-error {}
+
+.is-running {}
+.is-paused {}
+.is-stopped {}
+
+.is-complete {}
+.is-incomplete {}
+
+/* その他 */
+.is-empty {}
+.is-highlighted {}
+.is-alert {}
+.is-warning {}
+
+@media screen and (max-width: 767px) {
+
+    /* === 幅・表示 === */
+    .sm\:w-full {
+        width: 100%;
+    }
+
+    .sm\:max-w-4xl {
+        max-width: 1024px;
+    }
+
+    .sm\:hidden {
+        display: none;
+    }
+
+    .sm\:block {
+        display: block;
+    }
+
+    .sm\:inline-block {
+        display: inline-block;
+    }
+
+    /* === Flexbox・配置系 === */
+    .sm\:flex {
+        display: flex;
+    }
+
+    .sm\:flex-col {
+        flex-direction: column;
+    }
+
+    .sm\:flex-col-reverse {
+        flex-direction: column-reverse;
+    }
+
+    .sm\:items-center {
+        align-items: center;
+    }
+
+    .sm\:justify-start {
+        justify-content: flex-start;
+    }
+
+    .sm\:justify-center {
+        justify-content: center;
+    }
+
+    .sm\:justify-between {
+        justify-content: space-between;
+    }
+
+    .sm\:justify-end {
+        justify-content: flex-end;
+    }
+
+    /* === position系 ===  */
+    .sm\:position-relative {
+        position: relative;
+    }
+
+    .sm\:position-absolute {
+        position: absolute;
+    }
+
+    .sm\:position-fixed {
+        position: fixed;
+    }
+
+    .sm\:position-sticky {
+        position: sticky;
+    }
+
+    /* 改行 */
+    .sm\:normal {
+        white-space: normal;
+    }
+
+    .sm\:pre-line {
+        white-space: pre-line;
+    }
+}
