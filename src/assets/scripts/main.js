@@ -10,8 +10,6 @@
 
 import '../styles/style.scss';
 import { initClock } from './ui/clock.js';
-import { initWeather } from './ui/weather.js';
-import { initGarbage } from './ui/garbage.js';
 import { initDailyTodo } from './ui/dailyTodo.js';
 import { initStockTodo } from './ui/stockTodo.js';
 import { initTodayLog } from './ui/todayLog.js';
@@ -33,9 +31,9 @@ if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
 window.addEventListener('DOMContentLoaded', () => {
     // HTML読み込みが終わったあとに実行される処理
     //hamburger();
+    //initWeather();
     initClock();
-    initWeather();
-    initGarbage();
+
     initDailyTodo({
         listEl: document.getElementById('daily-list'),
         formEl: document.getElementById('memo-form'),

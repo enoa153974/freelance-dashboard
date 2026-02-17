@@ -5,6 +5,8 @@
 import { addToDailyTodo } from './dailyTodo.js';
 import { getToday } from '../utils/date.js';
 import { getCurrentTimerSeconds, resetTimer } from '../utils/time.js';
+import { save as saveStorage, load as loadStorage } from "../storage/storage.js";
+
 
 /**
  * Stock Todo 初期化
@@ -154,7 +156,7 @@ export function initStockTodo({
     }
 
     /* =========================
-       タスク削除（Stock → Daily 移動時）
+        タスク削除（Stock → Daily 移動時）
     ========================= */
     function removeFromStock(id) {
         todos = todos.filter(todo => todo.id !== id);
@@ -163,13 +165,13 @@ export function initStockTodo({
     }
 
     /* =========================
-       localStorage 操作
+        localStorage 操作
     ========================= */
     function save() {
-        localStorage.setItem(storageKey, JSON.stringify(todos));
+        saveStorage(storageKey, todos);
     }
 
     function load() {
-        return JSON.parse(localStorage.getItem(storageKey)) || [];
+        return loadStorage(storageKey) || [];
     }
 }

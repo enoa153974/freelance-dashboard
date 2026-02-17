@@ -1,6 +1,7 @@
 // todayLog.js
 import { getToday } from '../utils/date.js';
 import { formatSecondsHMS } from '../utils/time.js';
+import { load as loadStorage } from "../storage/storage.js";
 
 export function initTodayLog({
     listEl,
@@ -18,8 +19,8 @@ export function initTodayLog({
         listEl.innerHTML = '';
 
         const today = getToday();
-        const daily = load(dailyKey);
-        const stock = load(stockKey);
+        const daily = loadStorage(dailyKey) || [];
+        const stock = loadStorage(stockKey) || [];
 
         const todayDone = [...daily, ...stock].filter(
             t => t.done && t.completedAt === today
@@ -56,7 +57,4 @@ export function initTodayLog({
         });
     }
 
-    function load(key) {
-        return JSON.parse(localStorage.getItem(key)) || [];
-    }
 }

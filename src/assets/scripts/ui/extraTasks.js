@@ -1,12 +1,12 @@
 import { initExtraTaskManager } from '../common/extraTaskManager.js';
+import { qs } from "../utils/dom.js";
 
-export function initExtraTasks() {
+export function initTodoTasks() {
     initExtraTaskManager({
-        listEl: document.getElementById('extra-task-list'),
-        formEl: document.getElementById('extra-task-form'),
-        inputEl: document.getElementById('extra-task-input'),
-        resetBtn: document.getElementById('extra-task-reset'),
-        storageKeyPrefix: 'yuuma-extra',
-        showHanamaru: true
+        listEl: qs('#extra-task-list'),
+        formEl: qs('#extra-task-form'),
+        inputEl: qs('#extra-task-input'),
+        resetBtn: qs('#extra-task-reset'),
+        storageKeyPrefix: 'todo-task',
     });
 }

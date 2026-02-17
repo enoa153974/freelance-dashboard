@@ -1,147 +1,175 @@
-# House Dashboard PWA
+# 🧠 Freelance Work Dashboard
 
-家に余っている **Android タブレットを横置きのスマートディスプレイ**として活用するための、  
-**家族用ダッシュボード PWA**。
-
-時計・天気・家族ページ・おうち情報などを常設表示し、  
-**「見るだけで今の状況が分かる」**ことを最優先に設計している。
-
-本プロジェクトは、  
-**最終的に「素の HTML / CSS / JavaScript」として納品可能な構成**を前提としている。
+フリーランス業務を効率的に管理するためのPWAベース業務管理アプリ。
 
 ---
 
-## コンセプト
-
-- 家族専用・据え置き利用前提
-- 横置き Android タブレット特化
-- 操作性より **視認性・即時性** を優先
-- 機能は増やしすぎず、必要最小限に
-- 将来の拡張（PWA強化 / Firestore導入）を見据えた設計
+## 📌 現在の実装状況
 
 ---
 
-## メイン画面の役割
+## ✅ 1. デイリーTodo管理
 
-**「今、この家がどういう状態かを一瞬で把握する」**
+### 機能
 
-### 表示内容（確定）
+* タスク追加
+* 完了チェック
+* 未達成タスクをStockへ移動
+* StockからDailyへ戻す
+* localStorage保存
+* リロード不要の即時反映（カスタムイベント使用）
 
-- 大きめデジタル時計（最優先）
-- 今日の天気
-- 各人ページへのボタン  
-  - ゆうま  
-  - あしゃ  
-  - そーくん
-- ちゃっぴー起動ボタン（ChatGPT へワンクリック）
-- おうちの情報
-  - ゴミの日
-  - 家族への一時メモ（ホワイトボード的用途）
+### データ構造
 
----
-
-## 個人ページ（想定）
-
-### ゆうまページ
-- 今日の予定
-- 今やること（最大3つ）
-- 見通し・安心感を重視したUI
-
-### あしゃページ
-- 未実装
-
-### そーくんページ
-- 出勤時に持ち物の確認ができるように「タクシーメーター風」のチェックリストを配置
-- 遊び心で右半分のブロックには、推しキャラの画像をコメントがランダムで表示されるように
+```js
+{
+  id: 't-123456',
+  label: 'LPコーディング',
+  done: true,
+  completedAt: '2026-02-06',
+  workTime: 5400 // 秒
+}
+```
 
 ---
 
-## 技術スタック
+## ✅ 2. 未達成タスク（Stock）
 
-※ **ビルドツールとして使用。実行時依存はなし**
+### 機能
 
-- **Vite**
-- **Handlebars**（vite-plugin-handlebars）
-- **Sass**
-- **ES Modules**
-- **PWA 対応（予定）**
-- **Firestore（必要になった場合のみ導入）**
-- デプロイ：**Vercel**
-
-### パッケージ管理
-- **pnpm**
-  - 高速・安定した依存管理のため採用
-  - 最終納品物（dist）には一切影響しない
-
----
-## 開発方針・メモ
-
-### JavaScript 設計
-
-- **HTML 1ページにつき 1エントリ JS**
-- ページ固有の処理は各ページ用 JS に記述
-- **共通処理は `import` で共有**
-- `main.js` は **アプリ全体の初期化ハブ**
-
-#### main.js の役割
-
-- Sass（CSS）の読み込み
-- 共通機能 JS の `import`
-- `DOMContentLoaded` 後の初期化処理
+* 未達成タスクを保持
+* 完了チェック可能
+* 完了済み一括削除（confirm付き）
+* Dailyとの双方向移動
+* `todo:updated` カスタムイベントで同期
 
 ---
 
-## パス設計ルール（重要）
+## ✅ 3. 作業タイマー
 
-### JavaScript（import）
+### 機能
 
-- **相対パスで記述**
-- 基準は「その JS ファイルの位置」
-//import { initClock } from './features/clock.js';
+* ▶ 開始
+* ⏸ 停止
+* ⏹ リセット
+* リロード耐性あり
+* 秒単位で正確に計測
+* 常時カウント表示（h m s形式）
 
-データ・リソース（fetch / img / a など）
-ルート基準パスで統一
-fetch('/src/data/garbage.json');
+### 保存データ構造
 
-## ディレクトリ構成
+```js
+{
+  startAt: 1707350000000,
+  elapsed: 120,
+  running: true
+}
+```
 
-```txt
-/
-├ index.html                # メイン画面（エントリ）
-├ vite.config.js
-├ package.json
-├ pnpm-lock.yaml
-│
-├ dist/                     # build 出力（最終納品物）
-│
-├ public/                   # そのまま配信される静的ファイル
-│  ├ icons/
-│  └ images/
-│
-└ src/
-   ├ pages/                 # 下層ページ
-   │  ├ yuuma.html
-   │  ├ asha.html
-   │  └ so.html
-   │
-   ├ partials/              # Handlebars partials
-   │
-   ├ styles/
-   │  └ style.scss          # 共通スタイル（全ページ）
-   │
-   ├ scripts/
-   │  ├ main.js             # メイン画面用エントリ
-   │  ├ yuuma.js            # ゆうまページ用
-   │  ├ asha.js             # あしゃページ用
-   │  ├ so.js               # そーくんページ用
-   │
-   ├ features/              # 機能単位のJS（共通）
-   │  ├ clock.js
-   │  ├ weather.js
-   │  ├ garbage.js
-   │  └ homeMemo.js
-   │
-   └ data/                  # JSON 管理データ
-      ├ family.json
-      ├ garbage.json
-      └ config.json
+---
+
+## ✅ 4. タスクと作業時間の紐づけ
+
+タスク完了時に：
+
+* 現在のタイマー秒数を取得
+* `workTime` に保存
+* `completedAt` に日付保存
+* タイマーを自動リセット
+
+```js
+todo.workTime = getCurrentTimerSeconds();
+todo.completedAt = getToday();
+resetTimer();
+```
+
+---
+
+## ✅ 5. 今日の完了ログ表示
+
+### 表示内容
+
+* 今日完了したタスク一覧
+* 各タスクの作業時間
+* 今日の合計作業時間
+
+### 合計時間算出
+
+```js
+const totalSeconds = todayDone.reduce(
+  (sum, t) => sum + (t.workTime || 0),
+  0
+);
+```
+
+---
+
+## ✅ 6. 時間表示仕様
+
+内部データは秒で保持。
+
+表示形式は `●h ●m ●s`。
+
+例：
+
+```
+0h 3m 12s
+1h 15m 4s
+```
+
+### フォーマット関数
+
+```js
+export function formatSecondsHMS(seconds) {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = seconds % 60;
+
+    return `${h}h ${m}m ${s}s`;
+}
+```
+
+---
+
+## 🧩 設計方針
+
+### イベント駆動設計
+
+* `todo:updated` カスタムイベントを使用
+* 各モジュールを疎結合で構築
+* 即時UI反映
+* リロード不要
+
+### ユーティリティ分離
+
+```
+utils/
+ ├─ date.js
+ └─ time.js
+```
+
+* DOM依存ロジックと純粋関数を分離
+* 将来のFirebase移行に対応しやすい設計
+
+---
+
+## 🚀 今後の拡張予定
+
+* 案件（タグ）別時間集計
+* 今日 / 今週 / 今月 切替表示
+* 作業時間 × 単価 = 金額算出
+* Firebase導入
+* 作業ログ履歴ページ
+* ダッシュボード可視化
+
+---
+
+## 🎯 現在の到達地点
+
+* タスク管理 ✔
+* 作業時間計測 ✔
+* 完了ログ ✔
+* 合計時間算出 ✔
+* 即時同期 ✔
+
+実運用可能レベルの業務管理アプリ基盤が完成。

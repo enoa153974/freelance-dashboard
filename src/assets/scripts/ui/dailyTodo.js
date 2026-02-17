@@ -4,6 +4,8 @@
 
 import { getToday } from '../utils/date.js';
 import { getCurrentTimerSeconds, resetTimer } from '../utils/time.js';
+import { addClass } from "../utils/dom.js";
+import { save as saveStorage, load as loadStorage } from "../storage/storage.js";
 // Daily / Stock 間の更新同期に使うカスタムイベント名
 const TODO_UPDATE_EVENT = 'todo:updated';
 
@@ -37,10 +39,10 @@ export function initDailyTodo({
     render();
 
     /* =========================
-       他画面（Stock）からの更新通知
-       localStorage は更新されても、
-       JS 内の todos は自動で変わらないため
-       カスタムイベントで再読み込みする
+        他画面（Stock）からの更新通知
+        localStorage は更新されても、
+        JS 内の todos は自動で変わらないため
+        カスタムイベントで再読み込みする
     ========================= */
     window.addEventListener(TODO_UPDATE_EVENT, () => {
         todos = load();
@@ -48,7 +50,7 @@ export function initDailyTodo({
     });
 
     /* =========================
-       イベント
+        イベント
     ========================= */
 
     /* --- タスク追加 --- */
@@ -113,7 +115,7 @@ export function initDailyTodo({
     });
 
     /* =========================
-       描画処理
+        描画処理
     ========================= */
     function render() {
         // 一旦リストを空にする
@@ -125,7 +127,7 @@ export function initDailyTodo({
             li.className = 'todo-item';
 
             // 完了済みなら見た目用クラスを付与
-            if (todo.done) li.classList.add('is-done');
+            if (todo.done) addClass(li, 'is-done');
 
             li.innerHTML = `
                 <label class="todo-label">
@@ -164,7 +166,7 @@ export function initDailyTodo({
     }
 
     /* =========================
-       ロジック
+        ロジック
     ========================= */
 
     // 未達成タスクのみ抽出
@@ -173,15 +175,15 @@ export function initDailyTodo({
     }
 
     /* =========================
-       localStorage 操作
+        localStorage 操作
     ========================= */
 
     function save() {
-        localStorage.setItem(storageKey, JSON.stringify(todos));
+        saveStorage(storageKey, todos);
     }
 
     function load() {
-        return JSON.parse(localStorage.getItem(storageKey)) || [];
+        return loadStorage(storageKey) || [];
     }
 
     function loadStock() {
@@ -194,8 +196,8 @@ export function initDailyTodo({
 }
 
 /* =========================
-   Stock → Daily 戻し用
-   （Stock 側から呼ばれる）
+    Stock → Daily 戻し用
+    （Stock 側から呼ばれる）
 ========================= */
 
 /**
