@@ -15,8 +15,9 @@ import { initStockTodo } from './ui/stockTodo.js';
 import { initTodayLog } from './ui/todayLog.js';
 import { initWorkTimer } from './utils/time.js';
 import { initNav } from './ui/nav.js';
-import { initOverlay } from './ui/overlay.js';
-import { loadRules } from './modules/rulesViewer.js';
+import { openOverlay, initOverlay } from "./ui/overlay.js";
+import { initSaveWizard } from './ui/saveWizard.js';
+import { loadRules } from "./modules/rulesViewer.js";
 
 //import './switchPanel.js';
 //import './panel.js';
@@ -67,18 +68,30 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     initNav();
 
-    //必要なIDを渡してモーダルをoverlay表示
-    initOverlay({
-        trigger: '#openRules',
-        overlay: '#overlay',
-        close: '#closeModal',
-        //運用ルールを生成
-        // NOTE: /docs/freelance_folder_rules.mdを参照
-        onOpen: async () => {
-            const el = document.querySelector('#rulesContent');
-            el.textContent = await loadRules();
+    initOverlay();
+
+});
+
+
+document.getElementById("openSaveWizard").onclick = () => {
+
+    openOverlay({
+        html: document.getElementById("saveWizardTemplate").innerHTML,
+
+        onOpen() {
+            initSaveWizard({
+                root: document.getElementById("overlayContent")
+            });
         }
     });
 
 
-});
+};
+
+document.getElementById("openRules").onclick = async () => {
+
+    openOverlay({
+        html: `<pre>${await loadRules()}</pre>`
+    });
+
+};

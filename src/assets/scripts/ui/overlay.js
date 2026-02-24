@@ -1,43 +1,91 @@
-import { qs, addClass, removeClass } from "../utils/dom.js";
+// ==================================================
+// Overlay Controller (Advanced)
+// --------------------------------------------------
+// 機能
+// ・HTML差し込み表示
+// ・開閉コールバック
+// ・ESC閉じ
+// ・背景クリック閉じ
+// ・多重起動防止
+//
+// 使い方
+// openOverlay({
+//   html: "<div>内容</div>",
+//   onOpen(){},
+//   onClose(){}
+// })
+//
+// ==================================================
+
+let currentOnClose = null;
+let isOpen = false;
+
 
 // ==================================================
-// ■ overlayでモーダルを表示する関数
+// ■ 開く
 // ==================================================
+export function openOverlay({ html, onOpen = null, onClose = null } = {}) {
 
-export function initOverlay({
-    //汎用の関数を定義
-    trigger,
-    overlay,
-    close,
-    onOpen = null,
-    onClose = null
-}) {
+    const overlay = document.getElementById("overlay");
+    const box = document.getElementById("overlayContent");
 
-    const triggerEl = qs(trigger);
-    const overlayEl = qs(overlay);
-    const closeEl = qs(close);
+    if (!overlay || !box) return;
 
-    if (!triggerEl || !overlayEl || !closeEl) return;
+    // すでに開いてたら中身だけ差し替え
+    box.innerHTML = html || "";
 
-    triggerEl.addEventListener('click', async () => {
-        addClass(overlayEl, 'active');
-        document.body.style.overflow = 'hidden';
-        if (onOpen) await onOpen();
-    });
+    // callback保存
+    currentOnClose = onClose;
 
-    function closeOverlay() {
-        removeClass(overlayEl,'active');
-        document.body.style.overflow = '';
-        if (onClose) onClose();
+    if (!isOpen) {
+        overlay.classList.add("active");
+        document.body.style.overflow = "hidden";
+        isOpen = true;
     }
 
-    closeEl.addEventListener('click', closeOverlay);
+    if (onOpen) onOpen();
+}
 
-    overlayEl.addEventListener('click', e => {
-        if (e.target === overlayEl) closeOverlay();
-    });
 
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') closeOverlay();
+
+// ==================================================
+// ■ 閉じる
+// ==================================================
+export function closeOverlay() {
+
+    const overlay = document.getElementById("overlay");
+    if (!overlay || !isOpen) return;
+
+    overlay.classList.remove("active");
+    document.body.style.overflow = "";
+    isOpen = false;
+
+    if (currentOnClose) currentOnClose();
+    currentOnClose = null;
+}
+
+
+
+// ==================================================
+// ■ 初期化（1回だけ呼ぶ）
+// ==================================================
+export function initOverlay() {
+
+    const overlay = document.getElementById("overlay");
+    const close = document.getElementById("closeModal");
+
+    if (!overlay || !close) return;
+
+    // 閉じるボタン
+    close.onclick = closeOverlay;
+
+    // 背景クリック閉じ
+    overlay.onclick = e => {
+        if (e.target === overlay) closeOverlay();
+    };
+
+    // ESC閉じ
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape") closeOverlay();
     });
 }

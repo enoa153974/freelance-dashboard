@@ -1,0 +1,28 @@
+// ------------------------------
+// ◆ overlayモーダル
+// ------------------------------
+
+/* 背景 */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .5);
+    display: none;
+    z-index: 9999;
+}
+
+/* 表示状態 */
+.overlay.active {
+    display: grid;
+    place-items: center;
+}
+
+/* 本体 */
+.modal {
+    width: min(900px, 90%);
+    height: min(80vh, 800px);
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    overflow: auto;
+}

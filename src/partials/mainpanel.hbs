@@ -1,10 +1,9 @@
 <div class="main-panel l-row l-row--gap l-inner bg-color py-8 px-4 sm:py-6">
 
-
     <div class="left-panel l-column l-column--4 flex flex-col">
         <section class="stock-panel px-4 py-4 bg-sub color-text-sub">
             <div class="flex justify-between">
-                <h3 clasS="en"><i class="fas fa-xmark mr-2 color-text"></i>Incomplete Tasks</h3>
+                <h3 class="en"><i class="fas fa-xmark mr-2 color-text"></i>Incomplete Tasks</h3>
                 <button id="clear-done-stock" class="stock-clear color-text-sub">
                     完了済みを削除
                 </button>
@@ -77,15 +76,71 @@
                         </div>
                     </form>
 
+                    {{!-- 保存ナビ --}}
                     <div class="l-column l-column--6 py-4 px-4">
+                        <button id="openSaveWizard" type="button">保存ナビ</button>
+                        <template id="saveWizardTemplate">
+                            <div id="saveWizard" class="wizard">
+                                <section data-step="1" class="step active">
+                                    <h3>これは何？</h3>
+                                    <button type="button" data-type="project">案件データ</button>
+                                    <button type="button" data-type="client">顧客情報</button>
+                                    <button type="button" data-type="asset">共有素材</button>
+                                    <button type="button" data-type="inbox">迷った</button>
+                                </section>
 
+                                <section data-step="2" class="step">
+                                    <h3>案件情報</h3>
+
+                                    <label>既存案件</label>
+                                    <select id="projectHistory"></select>
+
+                                    <label>新規案件</label>
+                                    <input id="month" placeholder="2026-02">
+                                    <input id="projectName" placeholder="案件名">
+                                    <input id="companyName" placeholder="会社名">
+
+                                    <label>保存先</label>
+                                    <select id="folderType">
+                                        <option value="01_brief">01_brief</option>
+                                        <option value="02_source" selected>02_source</option>
+                                        <option value="03_export">03_export</option>
+                                        <option value="04_preview">04_preview</option>
+                                        <option value="05_client_material">05_client_material</option>
+                                        <option value="06_reference">06_reference</option>
+                                        <option value="07_admin">07_admin</option>
+                                    </select>
+
+                                    <button id="toStep3" type="button">次へ</button>
+                                </section>
+
+                                <section data-step="3" class="step">
+                                    <h3>ファイル生成</h3>
+
+                                    <select id="fileType">
+                                        <option>logo</option>
+                                        <option>banner</option>
+                                        <option>lp</option>
+                                        <option>site</option>
+                                        <option>illust</option>
+                                        <option>invoice</option>
+                                        <option>contract</option>
+                                    </select>
+
+                                    <input id="contentName" placeholder="内容（top / main）">
+                                    <input id="ext" placeholder=".ai">
+
+                                    <pre id="result"></pre>
+
+                                    <button id="copyAll" type="button">コピー</button>
+                                </section>
+                            </div>
+                        </template>
                     </div>
-
-
-                </section>
             </div>
         </section>
-
     </div>
+
+</div>
 
 </div>

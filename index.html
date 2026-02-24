@@ -42,8 +42,15 @@
 <body>
     <main class="main__wrapper l-container bg-main">
         {{> header }}
-        {{> mainpanel }}      
+        {{> mainpanel }}
         {{> toolpanel }}
+        <!-- 共通Overlay（ページ最下部に置く） -->
+        <div id="overlay" class="overlay" aria-hidden="true">
+            <div class="modal">
+                <button id="closeModal" type="button">×</button>
+                <div id="overlayContent"></div>
+            </div>
+        </div>
     </main>
     <script type="module" src="/src/assets/scripts/main.js"></script>
 </body>
