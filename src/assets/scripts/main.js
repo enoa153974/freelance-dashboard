@@ -15,23 +15,24 @@ import { initStockTodo } from './ui/stockTodo.js';
 import { initTodayLog } from './ui/todayLog.js';
 import { initWorkTimer } from './utils/time.js';
 import { initNav } from './ui/nav.js';
-
+import { initOverlay } from './ui/overlay.js';
+import { loadRules } from './modules/rulesViewer.js';
 
 //import './switchPanel.js';
 //import './panel.js';
 //import { hamburger } from './hamburger.js';
 
-/* Service Worker を登録 */
-if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js');
-    });
-}
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
     // HTML読み込みが終わったあとに実行される処理
     //hamburger();
     //initWeather();
+
+    // ServiceWorker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js');
+    }
+
     initClock();
 
     initDailyTodo({
@@ -65,4 +66,19 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     initNav();
+
+    //必要なIDを渡してモーダルをoverlay表示
+    initOverlay({
+        trigger: '#openRules',
+        overlay: '#overlay',
+        close: '#closeModal',
+        //運用ルールを生成
+        // NOTE: /docs/freelance_folder_rules.mdを参照
+        onOpen: async () => {
+            const el = document.querySelector('#rulesContent');
+            el.textContent = await loadRules();
+        }
+    });
+
+
 });
