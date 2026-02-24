@@ -43,7 +43,10 @@ export function openOverlay({ html, onOpen = null, onClose = null } = {}) {
         isOpen = true;
     }
 
-    if (onOpen) onOpen();
+    if (onOpen) { 
+        overlay.setAttribute("aria-hidden", "false");
+        onOpen();
+    }
 }
 
 
