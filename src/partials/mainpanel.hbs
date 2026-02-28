@@ -79,10 +79,35 @@
                     {{!-- 保存ナビ --}}
                     <div class="l-column l-column--6 py-4 px-4">
                         <button id="openSaveWizard" type="button">保存ナビ</button>
+
+                        {{!-- 以下、保存ナビモーダルの中身 --}}
                         <template id="saveWizardTemplate">
                             <div id="saveWizard" class="wizard">
+
+                                {{!-- 保存ナビヘッダー --}}
+                                <div class="wizard-head">
+                                    <p class="wizard-sub">保存先とファイル名を自動で作る</p>
+
+                                    <ol class="wizard-steps">
+                                        <li data-stepdot="1" class="is-active">1</li>
+                                        <li data-stepdot="2">2</li>
+                                        <li data-stepdot="3">3</li>
+                                    </ol>
+                                </div>
+
+                                {{!-- 保存ナビフッター --}}
+                                <div class="wizard-foot">
+                                    <button type="button" id="backStep" class="btn">戻る</button>
+                                    <div class="wizard-foot-right">
+                                        <button type="button" id="copyPath" class="btn">パスだけ</button>
+                                        <button type="button" id="copyName" class="btn">名前だけ</button>
+                                        <button type="button" id="copyAll" class="btn btn-primary">全部コピー</button>
+                                    </div>
+                                </div>
+
+
                                 <section data-step="1" class="step active">
-                                    <h3>これは何？</h3>
+                                    <h3>step1このファイルは何データ？</h3>
                                     <button type="button" data-type="project">案件データ</button>
                                     <button type="button" data-type="client">顧客情報</button>
                                     <button type="button" data-type="asset">共有素材</button>
@@ -90,7 +115,7 @@
                                 </section>
 
                                 <section data-step="2" class="step">
-                                    <h3>案件情報</h3>
+                                    <h3>step2案件情報</h3>
 
                                     <label>既存案件</label>
                                     <select id="projectHistory"></select>
@@ -115,7 +140,7 @@
                                 </section>
 
                                 <section data-step="3" class="step">
-                                    <h3>ファイル生成</h3>
+                                    <h3>step3ファイル生成</h3>
 
                                     <select id="fileType">
                                         <option>logo</option>
@@ -132,7 +157,6 @@
 
                                     <pre id="result"></pre>
 
-                                    <button id="copyAll" type="button">コピー</button>
                                 </section>
                             </div>
                         </template>
