@@ -7,6 +7,7 @@ import { qs, qsa, addClass, removeClass } from "../utils/dom.js";
 const BASE_PATH = "OneDrive/Freelance"; // ←表示用フルパス
 
 export function initSaveWizard({ root }) {
+    let currentStep = 1;
 
     if (!root) return;
 
@@ -18,19 +19,32 @@ export function initSaveWizard({ root }) {
     const steps = qsa(".step", root);
 
     function go(step) {
+        currentStep = Number(step);
+
+        //STEP表示切替
         steps.forEach(s => removeClass(s, "active"));
-        const target = qs(`[data-step="${step}"]`, root);
+
+        const target = qs(`[data-step="${currentStep}"]`, root);
         if (target) addClass(target, "active");
 
         //現在のSTEPを可視化するガイド部分
         const dots = qsa(".wizard-steps [data-stepdot]", root);
         dots.forEach(dot => {
             removeClass(dot, "is-active");
-            if (Number(dot.dataset.stepdot) === Number(step)) {
+            if (Number(dot.dataset.stepdot) === currentStep) {
                 addClass(dot, "is-active");
             }
         });
 
+        // Step1のとき戻るボタンを隠す
+        const backBtn = qs("#backStep", root);
+        if (backBtn) {
+            if (currentStep === 1) {
+                backBtn.style.display = "none";
+            } else {
+                backBtn.style.display = "inline-block";
+            }
+        }
         const firstInput = target?.querySelector("input,select,textarea,button");
         firstInput?.focus();
 
@@ -176,6 +190,7 @@ export function initSaveWizard({ root }) {
         //プレビューを画面に表示
         result.textContent =
             `保存先（フルパス）\n${fullPath}\n\nファイル名\n${fileName}`;
+        addClass(result,"result");
 
     }
 
@@ -188,6 +203,23 @@ export function initSaveWizard({ root }) {
         el.addEventListener("change", renderResult);
     });
 
+
+    // ------------------------------
+    // ◆ 戻るボタン
+    // ------------------------------
+    
+    const backBtn = qs("#backStep", root);
+
+    //戻るボタンを押したらSTEPを今いるとこからひとつ戻す
+    if (backBtn) {
+        backBtn.addEventListener("click", () => {
+
+            if (currentStep > 1) {
+                go(currentStep - 1);
+            }
+
+        });
+    }
     // ------------------------------
     // コピーボタンを押すと、出力結果のフルパスをコピー
     // ------------------------------
@@ -203,4 +235,3 @@ export function initSaveWizard({ root }) {
     //初回表示をSTEP1に
     go(1);
 }
-

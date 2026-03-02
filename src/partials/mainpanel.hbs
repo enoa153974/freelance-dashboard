@@ -78,7 +78,8 @@
 
                     {{!-- 保存ナビ --}}
                     <div class="l-column l-column--6 py-4 px-4">
-                        <button id="openSaveWizard" type="button">保存ナビ</button>
+                        <button id="openSaveWizard" type="button" class="wizard__btn btn btn--push"><span><i
+                                    class="fa-solid fa-folder-tree pr-2"></i>保存ナビ</span></button>
 
                         {{!-- 以下、保存ナビモーダルの中身 --}}
                         <template id="saveWizardTemplate">
@@ -86,78 +87,97 @@
 
                                 {{!-- 保存ナビヘッダー --}}
                                 <div class="wizard-head">
-                                    <p class="wizard-sub">保存先とファイル名を自動で作る</p>
+                                    <h3 class="wizard-sub pb-4">保存先の参照とファイル名の作成</h3>
 
-                                    <ol class="wizard-steps">
-                                        <li data-stepdot="1" class="is-active">1</li>
-                                        <li data-stepdot="2">2</li>
-                                        <li data-stepdot="3">3</li>
-                                    </ol>
+                                    {{!-- ガイド用ドット --}}
+                                    <div class="wizard-steps">
+                                        <ol class="wizard-steps__dot">
+                                            <li data-stepdot="1" class="is-active">1</li>
+                                            <li data-stepdot="2">2</li>
+                                            <li data-stepdot="3">3</li>
+                                        </ol>
+                                        {{!-- ガイド説明文 --}}
+                                        <ol class="wizard-steps__label">
+                                            <li>このファイルは何のデータか？</li>
+                                            <li>案件情報</li>
+                                            <li>ファイル生成</li>
+                                        </ol>
+                                    </div>
                                 </div>
 
                                 {{!-- 保存ナビフッター --}}
                                 <div class="wizard-foot">
-                                    <button type="button" id="backStep" class="btn">戻る</button>
+                                    <button type="button" id="backStep" class="btn btn--secondary wizard-foot__btn"><i
+                                            class="fa-solid fa-arrow-left"></i></button>
                                     <div class="wizard-foot-right">
-                                        <button type="button" id="copyPath" class="btn">パスだけ</button>
-                                        <button type="button" id="copyName" class="btn">名前だけ</button>
-                                        <button type="button" id="copyAll" class="btn btn-primary">全部コピー</button>
+                                        <button type="button" id="copyPath"
+                                            class="btn btn--primary wizard-foot__btn">パスだけ</button>
+                                        <button type="button" id="copyName"
+                                            class="btn btn--primary wizard-foot__btn">名前だけ</button>
+                                        <button type="button" id="copyAll"
+                                            class="btn btn--primary wizard-foot__btn">全部コピー</button>
                                     </div>
                                 </div>
 
+                                <div class="wizard-main">
+                                    <section data-step="1" class="step step--1 active">
+                                        <h3>【step1】このファイルは何データか？</h3>
+                                        <button type="button" data-type="project">案件データ</button>
+                                        <button type="button" data-type="client">顧客情報</button>
+                                        <button type="button" data-type="asset">共有素材</button>
+                                        <button type="button" data-type="inbox">迷った</button>
+                                    </section>
 
-                                <section data-step="1" class="step active">
-                                    <h3>step1このファイルは何データ？</h3>
-                                    <button type="button" data-type="project">案件データ</button>
-                                    <button type="button" data-type="client">顧客情報</button>
-                                    <button type="button" data-type="asset">共有素材</button>
-                                    <button type="button" data-type="inbox">迷った</button>
-                                </section>
+                                    <section data-step="2" class="step step--2">
+                                        <h3>【step2】案件情報</h3>
+                                        <div class="project-group">
+                                            <div class="project-group project-group--existing">
+                                                <label>既存案件</label>
+                                                <select id="projectHistory"></select>
+                                            </div>
 
-                                <section data-step="2" class="step">
-                                    <h3>step2案件情報</h3>
+                                            <div class="project-group project-group--new">
+                                                <label>新規案件</label>
+                                                <input id="month" placeholder="2026-02">
+                                                <input id="projectName" placeholder="案件名">
+                                                <input id="companyName" placeholder="会社名">
+                                            </div>
+                                        </div>
+                                        <label>保存先</label>
+                                        <select id="folderType">
+                                            <option value="01_brief">01_brief</option>
+                                            <option value="02_source" selected>02_source</option>
+                                            <option value="03_export">03_export</option>
+                                            <option value="04_preview">04_preview</option>
+                                            <option value="05_client_material">05_client_material</option>
+                                            <option value="06_reference">06_reference</option>
+                                            <option value="07_admin">07_admin</option>
+                                        </select>
 
-                                    <label>既存案件</label>
-                                    <select id="projectHistory"></select>
+                                        <button id="toStep3" type="button" class="btn btn--secondary step__next">次へ</button>
+                                    </section>
 
-                                    <label>新規案件</label>
-                                    <input id="month" placeholder="2026-02">
-                                    <input id="projectName" placeholder="案件名">
-                                    <input id="companyName" placeholder="会社名">
+                                    <section data-step="3" class="step step--3">
+                                        <h3>【step3】ファイル生成</h3>
 
-                                    <label>保存先</label>
-                                    <select id="folderType">
-                                        <option value="01_brief">01_brief</option>
-                                        <option value="02_source" selected>02_source</option>
-                                        <option value="03_export">03_export</option>
-                                        <option value="04_preview">04_preview</option>
-                                        <option value="05_client_material">05_client_material</option>
-                                        <option value="06_reference">06_reference</option>
-                                        <option value="07_admin">07_admin</option>
-                                    </select>
+                                        <select id="fileType">
+                                            <option>logo</option>
+                                            <option>banner</option>
+                                            <option>lp</option>
+                                            <option>site</option>
+                                            <option>illust</option>
+                                            <option>invoice</option>
+                                            <option>contract</option>
+                                        </select>
 
-                                    <button id="toStep3" type="button">次へ</button>
-                                </section>
+                                        <input id="contentName" placeholder="内容（top / main）">
+                                        <input id="ext" placeholder=".ai">
 
-                                <section data-step="3" class="step">
-                                    <h3>step3ファイル生成</h3>
+                                        <pre id="result"></pre>
 
-                                    <select id="fileType">
-                                        <option>logo</option>
-                                        <option>banner</option>
-                                        <option>lp</option>
-                                        <option>site</option>
-                                        <option>illust</option>
-                                        <option>invoice</option>
-                                        <option>contract</option>
-                                    </select>
+                                    </section>
 
-                                    <input id="contentName" placeholder="内容（top / main）">
-                                    <input id="ext" placeholder=".ai">
-
-                                    <pre id="result"></pre>
-
-                                </section>
+                                </div>
                             </div>
                         </template>
                     </div>

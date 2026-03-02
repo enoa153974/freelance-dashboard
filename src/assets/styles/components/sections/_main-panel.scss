@@ -7,8 +7,10 @@
 
 
 .main-panel {
+
     //左側パネル【未達成タスク・完了タスク】
     .left-panel {
+        min-height: 500px;
 
         //未達成タスクパネル
         .stock-item.is-done {
@@ -55,10 +57,11 @@
         }
 
         //作業計測タイマー
-        .timer__display{
+        .timer__display {
             font-size: var(--font-size-2xl);
         }
-        .timer__btn{
+
+        .timer__btn {
             padding: .5rem;
             background-color: #e6f4ea;
             border-radius: 5px;
