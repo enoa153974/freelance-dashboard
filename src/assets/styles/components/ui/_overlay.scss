@@ -41,6 +41,18 @@
     opacity: 0;
 
     transition: transform .25s, opacity .25s;
+
+
+    //モーダルの閉じるボタン
+    .close-modal{
+        background-color: #333;
+        width: 2rem;
+        height: 2rem;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        color: #fff;
+        margin-bottom: 1rem;
+    }
 }
 
 //モーダルopen時

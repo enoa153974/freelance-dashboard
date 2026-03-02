@@ -11,10 +11,6 @@ export function initSaveWizard({ root }) {
 
     if (!root) return;
 
-    //二重初期化防止（overlayを開くたび呼んでも壊れない）
-    if (root.dataset.initialized === "1") return;
-    root.dataset.initialized = "1";
-
     const state = { type: null, folder: null };
     const steps = qsa(".step", root);
 
@@ -190,7 +186,7 @@ export function initSaveWizard({ root }) {
         //プレビューを画面に表示
         result.textContent =
             `保存先（フルパス）\n${fullPath}\n\nファイル名\n${fileName}`;
-        addClass(result,"result");
+        addClass(result, "result");
 
     }
 
@@ -207,7 +203,7 @@ export function initSaveWizard({ root }) {
     // ------------------------------
     // ◆ 戻るボタン
     // ------------------------------
-    
+
     const backBtn = qs("#backStep", root);
 
     //戻るボタンを押したらSTEPを今いるとこからひとつ戻す
@@ -220,16 +216,54 @@ export function initSaveWizard({ root }) {
 
         });
     }
+
+
     // ------------------------------
-    // コピーボタンを押すと、出力結果のフルパスをコピー
+    // コピー処理（3ボタン対応版）
     // ------------------------------
-    const copyBtn = qs("#copyAll", root);
-    if (copyBtn) {
-        copyBtn.addEventListener("click", async () => {
-            const text = qs("#result", root)?.textContent || "";
+
+    async function copy(text, label) {
+        if (!text) return;
+
+        try {
             await navigator.clipboard.writeText(text);
-            alert("コピーした");
-        });
+            showCopyToast(label + "をコピーしました");
+        } catch {
+            alert("コピー失敗");
+        }
+    }
+
+    //各ボタンの要素を取得
+    const actions = {
+        copyPath: () => copy(buildFullPath(), "パス"),
+        copyName: () => copy(buildFileName(), "ファイル名"),
+        copyAll: () => copy(buildFullPath() + buildFileName(), "フルパス")
+    };
+
+    Object.entries(actions).forEach(([id, fn]) => {
+        const btn = qs(`#${id}`, root);
+        if (btn) btn.addEventListener("click", fn);
+    });
+
+    // ------------------------------
+    // ◆ トースト通知
+    // ------------------------------
+
+    function showCopyToast(msg) {
+        let toast = document.querySelector(".copy-toast");
+
+        if (!toast) {
+            toast = document.createElement("div");
+            toast.className = "copy-toast";
+            document.body.appendChild(toast);
+        }
+
+        toast.textContent = msg;
+        addClass(toast,"show");
+
+        setTimeout(() => {
+            removeClass(toast,"show");
+        }, 1400);
     }
 
     //初回表示をSTEP1に

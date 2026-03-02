@@ -111,9 +111,9 @@
                                             class="fa-solid fa-arrow-left"></i></button>
                                     <div class="wizard-foot-right">
                                         <button type="button" id="copyPath"
-                                            class="btn btn--primary wizard-foot__btn">パスだけ</button>
+                                            class="btn btn--primary wizard-foot__btn">パスのみ</button>
                                         <button type="button" id="copyName"
-                                            class="btn btn--primary wizard-foot__btn">名前だけ</button>
+                                            class="btn btn--primary wizard-foot__btn">ファイル名のみ</button>
                                         <button type="button" id="copyAll"
                                             class="btn btn--primary wizard-foot__btn">全部コピー</button>
                                     </div>
@@ -154,7 +154,8 @@
                                             <option value="07_admin">07_admin</option>
                                         </select>
 
-                                        <button id="toStep3" type="button" class="btn btn--secondary step__next">次へ</button>
+                                        <button id="toStep3" type="button"
+                                            class="btn btn--secondary step__next">次へ</button>
                                     </section>
 
                                     <section data-step="3" class="step step--3">
@@ -175,8 +176,15 @@
 
                                         <pre id="result"></pre>
 
-                                    </section>
 
+
+
+                                    </section>
+                                    <!-- 通知 -->
+                                    <div id="toast" class="copy-toast"></div>
+
+                                    <!-- 中身 -->
+                                    <div id="overlayContent"></div>
                                 </div>
                             </div>
                         </template>

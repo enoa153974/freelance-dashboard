@@ -85,6 +85,7 @@
                 color: var(--text-color);
             }
         }
+
     }
 
 
@@ -153,22 +154,42 @@
                 border: solid 2px var(--text-color);
                 padding: .5rem;
                 margin-inline: 40%;
-                
+
             }
         }
 
         // ------------------------------
         // ◆ STEP3表示時のデザイン
         // ------------------------------
-        .step--3.active{
-            input{
+        .step--3.active {
+            input {
                 margin-bottom: 1rem;
             }
 
-            .result{
+            .result {
                 font-weight: var(--font-weight-bold);
             }
         }
 
+        // ------------------------------
+        // ◆ トースト通知
+        // ------------------------------
+
+        .copy-toast {
+            position: absolute;
+            bottom: 2rem;
+            left: 1rem;
+            background: #333;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 6px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: .25s;
+        }
+
+        .copy-toast.show {
+            opacity: 1;
+        }
     }
 }

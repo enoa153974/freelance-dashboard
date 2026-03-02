@@ -43,7 +43,7 @@ export function openOverlay({ html, onOpen = null, onClose = null } = {}) {
         isOpen = true;
     }
 
-    if (onOpen) { 
+    if (onOpen) {
         overlay.setAttribute("aria-hidden", "false");
         onOpen();
     }
@@ -57,6 +57,8 @@ export function openOverlay({ html, onOpen = null, onClose = null } = {}) {
 export function closeOverlay() {
 
     const overlay = document.getElementById("overlay");
+    const content = document.getElementById("overlayContent");
+
     if (!overlay || !isOpen) return;
 
     overlay.classList.remove("active");
@@ -65,6 +67,9 @@ export function closeOverlay() {
 
     if (currentOnClose) currentOnClose();
     currentOnClose = null;
+
+    // DOMを空にする
+    if (content) content.innerHTML = "";
 }
 
 
@@ -79,7 +84,7 @@ export function initOverlay() {
 
     if (!overlay || !close) return;
 
-    // 閉じるボタン
+    // ×ボタン閉じ（動的要素対応）
     close.onclick = closeOverlay;
 
     // 背景クリック閉じ
