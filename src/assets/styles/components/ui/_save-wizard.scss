@@ -149,6 +149,16 @@
                 }
             }
 
+            .folder-help {
+                font-size: .75rem;
+            }
+
+            .folder-help::before {
+                content: "→";
+                margin-right: .5em;
+            }
+
+
             .btn.btn.btn--secondary.step__next {
                 color: var(--text-color);
                 border: solid 2px var(--text-color);

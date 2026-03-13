@@ -5,6 +5,18 @@
 import { qs, qsa, addClass, removeClass } from "../utils/dom.js";
 
 const BASE_PATH = "OneDrive/Freelance"; // ←表示用フルパス
+// ------------------------------
+// フォルダ説明
+// ------------------------------
+const folderDescriptions = {
+    "01_brief": "要件書・ヒアリング内容・仕様メモ",
+    "02_source": "制作データ（AI / PSD / FIG / HTML / CSSなど）",
+    "03_export": "納品データ",
+    "04_preview": "確認用スクリーンショット",
+    "05_client_material": "クライアント支給素材",
+    "06_reference": "参考サイト / デザイン参考",
+    "07_admin": "見積書 / 請求書 / 契約書",
+};
 
 export function initSaveWizard({ root }) {
     let currentStep = 1;
@@ -18,14 +30,14 @@ export function initSaveWizard({ root }) {
         currentStep = Number(step);
 
         //STEP表示切替
-        steps.forEach(s => removeClass(s, "active"));
+        steps.forEach((s) => removeClass(s, "active"));
 
         const target = qs(`[data-step="${currentStep}"]`, root);
         if (target) addClass(target, "active");
 
         //現在のSTEPを可視化するガイド部分
         const dots = qsa(".wizard-steps [data-stepdot]", root);
-        dots.forEach(dot => {
+        dots.forEach((dot) => {
             removeClass(dot, "is-active");
             if (Number(dot.dataset.stepdot) === currentStep) {
                 addClass(dot, "is-active");
@@ -43,13 +55,12 @@ export function initSaveWizard({ root }) {
         }
         const firstInput = target?.querySelector("input,select,textarea,button");
         firstInput?.focus();
-
     }
 
     // ------------------------------
     // STEP1:ファイルのデータの種別を選別
     // ------------------------------
-    qsa("[data-type]", root).forEach(btn => {
+    qsa("[data-type]", root).forEach((btn) => {
         btn.addEventListener("click", () => {
             state.type = btn.dataset.type;
 
@@ -71,7 +82,6 @@ export function initSaveWizard({ root }) {
     // ------------------------------
 
     const toStep3 = qs("#toStep3", root);
-
 
     if (toStep3) {
         //各種情報がフォームに入力されているか判定
@@ -130,11 +140,10 @@ export function initSaveWizard({ root }) {
         //履歴がある場合の表示を生成
         select.innerHTML =
             `<option value="">（履歴から選択）</option>` +
-            list.map(v => `<option value="${v}">${v}</option>`).join("");
+            list.map((v) => `<option value="${v}">${v}</option>`).join("");
     }
 
-    loadHistory();// ❗ IMPORTANT: 本当に必要か確認
-
+    loadHistory(); // ❗ IMPORTANT: 本当に必要か確認
 
     // ------------------------------
     // STEP3：結果生成
@@ -155,24 +164,27 @@ export function initSaveWizard({ root }) {
         // project
         const folderType = qs("#folderType", root)?.value || "02_source";
         const projectFolder = state.folder || "（案件未選択）";
-        return `${BASE_PATH}/Projects/${projectFolder}/${folderType}/`;
+        const YEAR = new Date().getFullYear();
+
+        return `${BASE_PATH}/Projects/${YEAR}/${projectFolder}/${folderType}/`;
     }
 
     //フルパスのファイルネームを生成
     function buildFileName() {
         const date = getTodayYYYYMMDD();
         const type = qs("#fileType", root)?.value || "lp";
-        const content = (qs("#contentName", root)?.value || "main").trim() || "main";
+        const content =
+            (qs("#contentName", root)?.value || "main").trim() || "main";
         let ext = (qs("#ext", root)?.value || "").trim();
         if (ext && !ext.startsWith(".")) ext = "." + ext;
 
         // project以外は案件名部分を "--" にして破綻防止
-        const folderPart = state.type === "project" ? (state.folder || "UNKNOWN") : "--";
+        const folderPart =
+            state.type === "project" ? state.folder || "UNKNOWN" : "--";
 
         //生成したフルパスを返す
         return `${date}_${type}_${folderPart}_${content}_v01${ext}`;
     }
-
 
     //結果を返して表示する
     function renderResult() {
@@ -184,21 +196,38 @@ export function initSaveWizard({ root }) {
         const fileName = buildFileName();
 
         //プレビューを画面に表示
-        result.textContent =
-            `保存先（フルパス）\n${fullPath}\n\nファイル名\n${fileName}`;
+        result.textContent = `保存先（フルパス）\n${fullPath}\n\nファイル名\n${fileName}`;
         addClass(result, "result");
-
     }
 
+    // ------------------------------
+    // フォルダ説明表示
+    // ------------------------------
+    function updateFolderHelp() {
+        const select = qs("#folderType", root);
+        const help = qs("#folderHelp", root);
+
+        if (!select || !help) return;
+
+        const value = select.value;
+        help.textContent = folderDescriptions[value] || "";
+    }
 
     // Step3入力が変わったらプレビューをリアルタイム更新
     ["#fileType", "#contentName", "#ext", "#folderType", "#projectHistory", "#month", "#projectName", "#companyName"].forEach(sel => {
         const el = qs(sel, root);
         if (!el) return;
-        el.addEventListener("input", renderResult);
-        el.addEventListener("change", renderResult);
-    });
 
+        el.addEventListener("input", () => {
+            renderResult();
+            updateFolderHelp();
+        });
+
+        el.addEventListener("change", () => {
+            renderResult();
+            updateFolderHelp();
+        });
+    });
 
     // ------------------------------
     // ◆ 戻るボタン
@@ -209,14 +238,11 @@ export function initSaveWizard({ root }) {
     //戻るボタンを押したらSTEPを今いるとこからひとつ戻す
     if (backBtn) {
         backBtn.addEventListener("click", () => {
-
             if (currentStep > 1) {
                 go(currentStep - 1);
             }
-
         });
     }
-
 
     // ------------------------------
     // コピー処理（3ボタン対応版）
@@ -237,7 +263,7 @@ export function initSaveWizard({ root }) {
     const actions = {
         copyPath: () => copy(buildFullPath(), "パス"),
         copyName: () => copy(buildFileName(), "ファイル名"),
-        copyAll: () => copy(buildFullPath() + buildFileName(), "フルパス")
+        copyAll: () => copy(buildFullPath() + buildFileName(), "フルパス"),
     };
 
     Object.entries(actions).forEach(([id, fn]) => {
@@ -259,13 +285,14 @@ export function initSaveWizard({ root }) {
         }
 
         toast.textContent = msg;
-        addClass(toast,"show");
+        addClass(toast, "show");
 
         setTimeout(() => {
-            removeClass(toast,"show");
+            removeClass(toast, "show");
         }, 1400);
     }
 
+    updateFolderHelp();
     //初回表示をSTEP1に
     go(1);
 }
