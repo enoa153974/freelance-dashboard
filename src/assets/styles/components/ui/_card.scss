@@ -1,0 +1,159 @@
+@use '../../foundation/import.scss' as *;
+/* ==================================================
+    Component: Card
+    --------------------------------------------------
+    汎用カードコンポーネント
+
+    使用例
+    ---------------------------------
+
+    <article class="c-card">
+        <div class="c-card__media">
+        <img src="/images/sample.jpg" alt="">
+        </div>
+
+        <div class="c-card__body">
+        <h3 class="c-card__title">タイトル</h3>
+        <p class="c-card__text">説明文</p>
+        </div>
+    </article>
+
+================================================== */
+
+.c-card {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+
+    background: var(--main-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+
+    transition: transform .3s, box-shadow .3s;
+
+    height: 100%;
+
+
+    &__body {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+
+    /* ------------------------------
+    title
+------------------------------ */
+
+    &__title {
+        font-size: var(--font-size-xl);
+        font-weight: 600;
+    }
+
+
+    /* ------------------------------
+    text
+------------------------------ */
+
+    &__text {
+        margin-top: 8px;
+        font-size: var(--font-size-xl);
+        line-height: 1.6;
+        color: #666;
+    }
+}
+
+
+// ==================================================
+// ■ 以下に派生cardデザインを記述
+// ==================================================
+
+
+.c-card--voice {
+
+    padding: var(--space-l);
+    text-align: center;
+
+
+
+    .c-card__body {
+        padding: 0;
+    }
+
+    .c-card__media {
+        margin-bottom: var(--space-m);
+    }
+
+    .c-card__name {
+        font-weight: 600;
+        margin-top: auto;
+    }
+
+    .c-card__meta {
+        font-size: var(--font-size-sm);
+        color: #777;
+    }
+
+
+}
+
+
+// 横並び
+.c-card--flex {
+    display: flex;
+    flex-direction: row;
+    padding: var(--space-m);
+
+    @include media-query(md) {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .c-card__media {
+        flex: 0 0 30%;
+
+        @include media-query(md) {
+            margin: 0 auto;
+        }
+    }
+}
+
+//横並び（反転）
+.c-card--flex-reverse {
+    flex-direction: row-reverse;
+
+    @include media-query(md) {
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+//シャドウ入り
+.c-card--shadow {
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, .10),
+        0 2px 6px rgba(0, 0, 0, .06);
+}
+
+
+//枠線入り
+.c-card--border {
+    border: 1px solid var(--main-color);
+}
+
+//ホバー
+.c-card--hover {
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.c-card--hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .12);
+}
+
+//コンパクト
+.c-card--compact {
+    padding: var(--space-s);
+}

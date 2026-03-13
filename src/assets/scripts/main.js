@@ -18,6 +18,7 @@ import { initNav } from './ui/nav.js';
 import { openOverlay, initOverlay } from "./ui/overlay.js";
 import { initSaveWizard } from './ui/saveWizard.js';
 import { loadRules } from "./modules/rulesViewer.js";
+import { loadFlows } from "./modules/flowsViewer.js";
 
 //import './switchPanel.js';
 //import './panel.js';
@@ -92,6 +93,14 @@ document.getElementById("openRules").onclick = async () => {
 
     openOverlay({
         html: `<pre>${await loadRules()}</pre>`
+    });
+
+};
+
+document.getElementById("openFlows").onclick = async () => {
+
+    openOverlay({
+        html: `<pre>${await loadFlows()}</pre>`
     });
 
 };

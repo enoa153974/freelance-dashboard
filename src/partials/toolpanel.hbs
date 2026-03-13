@@ -2,38 +2,42 @@
 
 <section class="controls">
     <div class="l-inner bg-sub py-4 px-4 l-row l-row--gap sm:flex-col">
-        {{!-- chatGPTボタン --}}
+        {{! chatGPTボタン }}
         <button class="btn controls__btn bg-accent" id="btnChatGPT">
             <span></span>
             <i class="fa-solid fa-robot"></i>
             <p>chatGPT</p>
         </button>
 
-
-        {{!-- 外部ページ移管ボタン ・後で内容書き換え--}}
-        <button class="btn controls__btn nav-btn bg-accent" data-page="yuuma">
-            <i class="fa-solid fa-child-reaching"></i>
+        {{! 外部ページ移管ボタン ・後で内容書き換え}}
+        <button class="btn controls__btn bg-accent" id="btnAmazon">
+            <i class="fa-brands fa-amazon"></i>
             <p>Amazon</p>
         </button>
 
-        <button class="btn controls__btn nav-btn bg-accent" data-page="asha">
-            <i class="fa-solid fa-person-dress"></i>
+        <button class="btn controls__btn bg-accent" id="btnNotion">
+            <i class="fa-solid fa-note-sticky"></i>
             <p>notion</p>
         </button>
 
-        <button class="btn controls__btn nav-btn bg-accent" data-page="sota">
-            <i class="fa-solid fa-user-tie"></i>
+        <button class="btn controls__btn nav-btn bg-accent" data-page="hint">
+            <i class="fa-regular fa-lightbulb"></i>
             <p>コーディングツール</p>
         </button>
 
-        {{!-- 運用ルールボタン：オーバーレイモーダルでmdを表示 --}}
-        <button id="openRules" class="btn controls__btn nav-btn bg-accent">
+        {{! 運用ルールボタン：オーバーレイモーダルでmdを表示 }}
+        <button id="openRules" class="btn controls__btn bg-accent">
             <i class="fa-solid fa-scale-balanced"></i>
             <p>運用ルール</p>
         </button>
 
+        {{! 開発フローボタン：オーバーレイモーダルでmdを表示 }}
+        <button id="openFlows" class="btn controls__btn bg-accent">
+            <i class="fa-solid fa-scale-balanced"></i>
+            <p>開発フロー</p>
+        </button>
 
-        {{!-- <button class="btn controls__btn">
+        {{! <button class="btn controls__btn">
             <span></span>
             <i class="fa-solid fa-house"></i>
             <p>仮5</p>
@@ -52,6 +56,6 @@
         <button class="btn controls__btn">
             <i class="fa-solid fa-language"></i>
             <p>仮8</p>
-        </button> --}}
+        </button> }}
     </div>
 </section>

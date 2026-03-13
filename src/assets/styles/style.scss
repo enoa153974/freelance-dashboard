@@ -28,8 +28,7 @@
  * ---------------------------- */
 @use 'components/sections/main-panel';
 @use 'components/sections/tool-panel';
-/* @use 'components/sections/table-panel';
- */
+@use 'components/sections/hint-page';
 /* -------------------------------
  *  file import (components/ui)
  * ---------------------------- */
@@ -45,6 +44,8 @@
 @use 'components/ui/overlay';
 /* savewizardのcss */
 @use 'components/ui/save-wizard';
+/* cardのcss */
+@use 'components/ui/card';
 
 /* -------------------------------
  *  file import (utility)
@@ -65,3 +66,5 @@
 @use 'utility/color';
 /* フォントクラス */
 @use 'utility/font';
+/* u-link-coverクラス */
+@use 'utility/link-cover';

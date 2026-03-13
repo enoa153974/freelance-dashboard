@@ -1,0 +1,57 @@
+{{!--
+使用例
+
+{{> card
+    image="/images/sample_img.jpg"
+    alt=""
+    title="採用ページ"
+    text="説明文"
+    url="/service/"
+    modifier="c-card--flex"
+    imageWrapperClass="image-wrapper--circle"
+
+
+    //class="u-link-cover"で
+    リンクカードをON/OFFできる設計。
+    ※親要素にposition: relative;を付けること
+}}
+
+--}}
+
+<article class="c-card {{#if cardClass}}{{cardClass}}{{/if}} {{modifier}}">
+
+    {{#if url}}
+    <a href="{{url}}" class="u-link-cover" aria-label="{{title}}"></a>
+    {{/if}}
+
+    {{#if image}}
+    <div class="c-card__media">
+        <div class="image-wrapper {{imageWrapperClass}}">
+            <img src="{{image}}" alt="{{alt}}">
+        </div>
+    </div>
+    {{/if}}
+
+    <div class="c-card__body">
+
+        {{#if title}}
+        <h3 class="c-card__title">
+            {{title}}
+        </h3>
+        {{/if}}
+
+        {{#if text}}
+        <p class="c-card__text">
+            {{text}}
+        </p>
+        {{/if}}
+
+        {{#if cta}}
+        <div class="c-card__cta">
+            {{{cta}}}
+        </div>
+        {{/if}}
+
+    </div>
+
+</article>

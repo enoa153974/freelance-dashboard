@@ -1,0 +1,25 @@
+@use "../../foundation/import.scss" as *;
+
+.hint-card__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+
+    .c-card {
+        background: var(--sub-color);
+
+
+        .c-card__media img{
+            min-height: 160px;
+        }
+
+        &__title {
+            color: #eee;
+        }
+
+        &__text {
+            font-size: var(--font-size-lg);
+            color: #fff;
+        }
+    }
+}
