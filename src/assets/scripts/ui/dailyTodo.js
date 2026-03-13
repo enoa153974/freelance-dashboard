@@ -6,6 +6,9 @@ import { getToday } from '../utils/date.js';
 import { getCurrentTimerSeconds, resetTimer } from '../utils/time.js';
 import { addClass } from "../utils/dom.js";
 import { save as saveStorage, load as loadStorage } from "../storage/storage.js";
+import { enableTouchSort } from '../common/touchSort.js';
+
+
 // Daily / Stock 間の更新同期に使うカスタムイベント名
 const TODO_UPDATE_EVENT = 'todo:updated';
 
@@ -33,7 +36,11 @@ export function initDailyTodo({
     if (!listEl || !formEl || !inputEl) return;
 
     // localStorage から Daily タスクを読み込み
-    let todos = load();
+    let todos = loadDaily();
+    //ソート用のstateを追加
+    const sortState = {
+        isReordering: false
+    };
 
     // 初期描画
     render();
@@ -45,7 +52,7 @@ export function initDailyTodo({
         カスタムイベントで再読み込みする
     ========================= */
     window.addEventListener(TODO_UPDATE_EVENT, () => {
-        todos = load();
+        todos = loadDaily();
         render();
     });
 
@@ -123,8 +130,12 @@ export function initDailyTodo({
 
         // タスクを1件ずつ描画
         todos.forEach(todo => {
+            //liを取得
             const li = document.createElement('li');
+            //クラス名を付ける
             li.className = 'todo-item';
+            //data-idを付ける
+            li.dataset.id = todo.id;
 
             // 完了済みなら見た目用クラスを付与
             if (todo.done) addClass(li, 'is-done');
@@ -156,13 +167,21 @@ export function initDailyTodo({
 
                 save();
                 render();
-
                 window.dispatchEvent(new CustomEvent('todo:updated'));
             });
 
 
             listEl.appendChild(li);
+
         });
+
+        //ここで並び替えを再初期化
+        enableTouchSort(
+            listEl,
+            saveOrder,
+            sortState,
+            '.todo-item'
+        );
     }
 
     /* =========================
@@ -182,16 +201,40 @@ export function initDailyTodo({
         saveStorage(storageKey, todos);
     }
 
-    function load() {
+    function loadDaily() {
         return loadStorage(storageKey) || [];
     }
+
+    // ------------------------------
+    // ◆Todoを localStorage から読み込む関数
+    // ------------------------------
 
     function loadStock() {
         return JSON.parse(localStorage.getItem(stockKey)) || [];
     }
 
+    // ------------------------------
+    // ◆Todoを localStorage に保存する関数
+    // ------------------------------
+
     function saveStock(stockTodos) {
         localStorage.setItem(stockKey, JSON.stringify(stockTodos));
+    }
+
+    // ------------------------------
+    // ◆Todoの順序を localStorage に保存する関数
+    // ------------------------------
+
+    function saveOrder() {
+
+        const items = listEl.querySelectorAll('.todo-item');
+
+        const order = [...items].map(item => item.dataset.id);
+
+        // id順で並び替え
+        todos.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+
+        save();
     }
 }
 

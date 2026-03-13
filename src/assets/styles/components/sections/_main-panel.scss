@@ -1,10 +1,9 @@
-@use '../../foundation/import.scss' as *;
+@use "../../foundation/import.scss" as *;
 
 /* === デバッグ用各要素アウトライン
 * {
     outline: 1px solid red;
 } === */
-
 
 .main-panel {
 
@@ -14,7 +13,7 @@
 
         //未達成タスクパネル
         .stock-item.is-done {
-            opacity: .5;
+            opacity: 0.5;
         }
 
         .stock-item.is-done .stock-label {
@@ -26,11 +25,11 @@
         }
 
         .stock-clear {
-            opacity: .7;
+            opacity: 0.7;
         }
 
         .stock-clear:disabled {
-            opacity: .3;
+            opacity: 0.3;
             pointer-events: none;
         }
     }
@@ -40,8 +39,27 @@
 
         //dailyTODOパネル
         .daily-todo {
+            .todo-item {
+                position: relative;
+                transition:
+                    transform 0.2s ease,
+                    box-shadow 0.2s ease,
+                    opacity 0.2s ease,
+                    background-color 0.2s ease;
+
+
+                // 長押しドラッグ中
+                &.is-dragging {
+                    z-index: 10;
+                    opacity: 0.95;
+                    transform: scale(1.02);
+                    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.18);
+                    cursor: grabbing;
+                }
+            }
+
             .todo-item.is-done {
-                opacity: .5;
+                opacity: 0.5;
             }
 
             .todo-item.is-done span {
@@ -62,7 +80,7 @@
         }
 
         .timer__btn {
-            padding: .5rem;
+            padding: 0.5rem;
             background-color: #e6f4ea;
             border-radius: 5px;
         }
