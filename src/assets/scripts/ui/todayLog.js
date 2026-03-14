@@ -6,6 +6,7 @@ import {
     save as saveStorage,
 } from "../storage/storage.js";
 import { qs } from "../utils/dom.js";
+import { saveTodayToWorkLog } from "./dailyTodo.js";
 
 export function initTodayLog({
     listEl,
@@ -86,13 +87,13 @@ export function initTodayLog({
 
 
     //全削除ボタン
-    const clearBtn = qs("#completed-log-clear", document);
+    const saveBtn = qs("#completed-log-save", document);
 
-    clearBtn?.addEventListener("click", () => {
+    saveBtn?.addEventListener("click", () => {
 
-        if (!confirm("完了済みのログをすべて削除しますか？")) return;
+        if (!confirm("完了済みのログをすべて保存しますか？")) return;
 
-        saveStorage("today-log", []);
+        saveTodayToWorkLog();
 
         render();
     });

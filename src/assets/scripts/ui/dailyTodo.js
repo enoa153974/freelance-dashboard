@@ -162,7 +162,7 @@ export function initDailyTodo({
                     todo.workTime = getCurrentTimerSeconds();
 
                     addTodayLog(todo);
-                    addWorkLog(todo);
+
                     // タイマーを自動リセット
                     resetTimer();
                 } else {
@@ -289,15 +289,14 @@ function addTodayLog(todo) {
 // ------------------------------
 // ◆ work-logを保存する関数
 // ------------------------------
-function addWorkLog(todo) {
-    const logs = loadStorage("work-log") || [];
+export function saveTodayToWorkLog() {
 
-    logs.push({
-        id: `work-${Date.now()}`,
-        label: todo.label,
-        workTime: todo.workTime || 0,
-        completedAt: todo.completedAt
-    });
+    const todayLogs = loadStorage("today-log") || [];
+    const workLogs = loadStorage("work-log") || [];
 
-    saveStorage("work-log", logs);
+    const merged = [...workLogs, ...todayLogs];
+
+    saveStorage("work-log", merged);
+
+    saveStorage("today-log", []);
 }
