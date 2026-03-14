@@ -31,8 +31,12 @@ window.addEventListener('DOMContentLoaded', async () => {
     //initWeather();
 
     // ServiceWorker
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js');
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/service-worker.js")
+                .then(() => console.log("SW registered"))
+                .catch(err => console.log("SW error", err));
+        });
     }
 
     initClock();
