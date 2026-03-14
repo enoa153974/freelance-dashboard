@@ -1,5 +1,6 @@
 import '../styles/style.scss';
 import { initClock } from './ui/clock.js';
+import { initCopyButtons } from "./utils/button.js";
 
 window.addEventListener('DOMContentLoaded', async () => {
     // HTML読み込みが終わったあとに実行される処理
@@ -11,5 +12,5 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     //ヘッダーの時計
     initClock();
-
+    initCopyButtons();
 })

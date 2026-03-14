@@ -113,3 +113,31 @@
     max-width: 100%;
     display: block;
 }
+
+/* 汎用コピーボタン */
+// ------------------------------
+// <button class="copy-btn" data-copy="npm run build">Copy</button>
+//　で汎用コピーボタンが配置できる
+// ------------------------------
+
+.copy-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+
+    background: #1e1e1e;
+    color: #fff;
+    padding: .5rem .6rem;
+    border-radius: 6px;
+}
+
+.copy-btn {
+    border: none;
+    background: #3b82f6;
+    color: white;
+    padding: .25rem .6rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: .8rem;
+}

@@ -5,14 +5,19 @@
             <div class="flex justify-between">
                 <h3 class="en"><i class="fas fa-xmark mr-2 color-text"></i>Incomplete Tasks</h3>
                 <button id="clear-done-stock" class="stock-clear color-text-sub">
-                    完了済みを削除
+                    完了済みを全削除
                 </button>
             </div>
             <ul id="stock-list" class="py-2"></ul>
         </section>
 
         <section class="today-log px-4 py-4 bg-sub color-text-sub mt-4">
-            <h3 class="en"><i class="fas fa-circle-check mr-2  color-text"></i>Completed Tasks</h3>
+            <div class="flex justify-between">
+                <h3 class="en"><i class="fas fa-circle-check mr-2  color-text"></i>Completed Tasks</h3>
+                <button id="completed-log-clear" class="stock-clear color-text-sub">
+                    完了済みを全削除
+                </button>
+            </div>
             <ul id="today-log-list"></ul>
             <div class="today-summary mt-4 flex justify-end items-center">
                 <i class="fas fa-stopwatch mr-2"></i>今日の作業時間：

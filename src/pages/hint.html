@@ -123,7 +123,56 @@
             </div>
 
         </div>
+        <section class="tips l-inner">
+            <h2 class="tips__title">LocalStorage Tips</h2>
 
+            <ul class="tips__list">
+                <li class="tips__item">
+                    <p class="tips__label">work-log確認</p>
+
+                    <div class="tips__code">
+                        <code>JSON.parse(localStorage.getItem("work-log"))</code>
+                        <button class="copy-btn" data-copy='JSON.parse(localStorage.getItem("work-log"))'>
+                            Copy
+                        </button>
+                    </div>
+                </li>
+
+                <li class="tips__item">
+                    <p class="tips__label">work-log削除</p>
+
+                    <div class="tips__code">
+                        <code>localStorage.removeItem("work-log")</code>
+                        <button class="copy-btn" data-copy='localStorage.removeItem("work-log")'>
+                            Copy
+                        </button>
+                    </div>
+                </li>
+
+                <li class="tips__item">
+                    <p class="tips__label">today-log確認</p>
+
+                    <div class="tips__code">
+                        <code>JSON.parse(localStorage.getItem("today-log"))</code>
+                        <button class="copy-btn" data-copy='JSON.parse(localStorage.getItem("today-log"))'>
+                            Copy
+                        </button>
+                    </div>
+                </li>
+
+                <li class="tips__item">
+                    <p class="tips__label">全ストレージ削除</p>
+
+                    <div class="tips__code">
+                        <code>localStorage.clear()</code>
+                        <button class="copy-btn" data-copy='localStorage.clear()'>
+                            Copy
+                        </button>
+                    </div>
+                </li>
+
+            </ul>
+        </section>
 
         <!-- 共通Overlay（ページ最下部に置く） -->
         <!-- <div id="overlay" class="overlay" aria-hidden="true">
