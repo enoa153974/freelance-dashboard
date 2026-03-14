@@ -124,7 +124,7 @@ export function initDailyTodo({
     });
 
     /* =========================
-          描画処理
+            描画処理
       ========================= */
     function render() {
         // 一旦リストを空にする
@@ -161,6 +161,7 @@ export function initDailyTodo({
                     todo.completedAt = getToday();
                     todo.workTime = getCurrentTimerSeconds();
 
+                    addTodayLog(todo);
                     // タイマーを自動リセット
                     resetTimer();
                 } else {
@@ -266,4 +267,20 @@ export function addToDailyTodo({ label, storageKey = "daily-todo" }) {
     });
 
     localStorage.setItem(storageKey, JSON.stringify(todos));
+}
+
+// ------------------------------
+// ◆ today-logを保存する関数
+// ------------------------------
+function addTodayLog(todo) {
+    const logs = loadStorage("today-log") || [];
+
+    logs.push({
+        id: `log-${Date.now()}`,
+        label: todo.label,
+        workTime: todo.workTime || 0,
+        completedAt: todo.completedAt,
+    });
+
+    saveStorage("today-log", logs);
 }

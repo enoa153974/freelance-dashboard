@@ -19,11 +19,10 @@ export function initTodayLog({
         listEl.innerHTML = '';
 
         const today = getToday();
-        const daily = loadStorage(dailyKey) || [];
-        const stock = loadStorage(stockKey) || [];
+        const logs = loadStorage("today-log") || [];
 
-        const todayDone = [...daily, ...stock].filter(
-            t => t.done && t.completedAt === today
+        const todayDone = logs.filter(
+            log => log.completedAt === today
         );
 
         /* ===== 合計作業時間 ===== */
