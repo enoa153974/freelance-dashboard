@@ -11,35 +11,33 @@ import path from 'path';
 import { resolve } from 'path';
 import fs from 'fs';
 
-// ========================================
-// マルチHTML対応設定
-// src/pages 配下の html を自動でビルド対象にする
-// ========================================
-
-// 下層ページのディレクトリ
+// ===============================
+// ■ マルチHTML設定
+// ===============================
 const pagesDir = resolve(__dirname, 'src/pages');
 
-// Vite / Rollup に渡す input 定義
-// index.html は常にエントリに含める
 const inputs = {
     main: resolve(__dirname, 'index.html'),
 };
 
-// src/pages が存在する場合のみ処理
 if (fs.existsSync(pagesDir)) {
     fs.readdirSync(pagesDir).forEach(file => {
+        const fullPath = resolve(pagesDir, file);
+
+        // 直下HTML
         if (file.endsWith('.html')) {
-            // pages/yuuma.html → yuuma
             const name = file.replace('.html', '');
-            inputs[name] = resolve(pagesDir, file);
+            inputs[name] = fullPath;
         }
     });
 }
 
+console.log(inputs);
 // ========================================
 // Vite 設定本体
 // ========================================
 export default defineConfig({
+
     // ------------------------------------
     // Vercel / 静的サーバー向け
     // ルート基準でパスを解決
@@ -52,11 +50,29 @@ export default defineConfig({
     // ------------------------------------
     plugins: [
         handlebars({
-            // partial の置き場所
             partialDirectory: path.resolve(__dirname, 'src/partials'),
         }),
-    ],
 
+        {
+            name: 'custom-routing',
+            configureServer(server) {
+                server.middlewares.use((req, res, next) => {
+
+                    // pages/配下のhtmlファイル を src/pages にリダイレクト
+                    const routes = {
+                        '/work-log.html': '/src/pages/work-log.html',
+                        '/hint.html': '/src/pages/hint.html',
+                    };
+
+                    if (routes[req.url]) {
+                        req.url = routes[req.url];
+                    }
+
+                    next();
+                });
+            }
+        }
+    ],
     // ------------------------------------
     // ビルド設定（＝最終納品物の形）
     // ------------------------------------
@@ -87,7 +103,7 @@ export default defineConfig({
             output: {
                 // 各HTMLに対応するJS
                 // index.html → assets/js/main.js
-                // yuuma.html → assets/js/yuuma.js
+                // work-log.html → assets/js/work-log.js
                 entryFileNames: 'assets/js/[name].js',
 
                 // 共通チャンク（vendorなど）
@@ -126,5 +142,6 @@ export default defineConfig({
         watch: {
             usePolling: true, // 環境依存の監視対策
         },
+
     },
 });

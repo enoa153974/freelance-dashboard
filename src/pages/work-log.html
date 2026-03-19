@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-    <title>おしごとダッシュボード</title>
+    <title>作業ログ</title>
 
     <!-- PWA -->
     <link rel="manifest" href="/manifest.json">
@@ -23,7 +23,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-
     <!-- Googlefont -->
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=IBM+Plex+Sans:wght@400;500&family=Share+Tech+Mono&display=swap"
@@ -39,22 +38,26 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
-<body class="page-home">
-    <main class="main__wrapper l-container bg-main">
-        {{> header }}
-        {{> mainpanel }}
-        {{> toolpanel }}
+<body class="page-work-log">
+
+    <main class="work-log main__wrapper l-container bg-white">
+
+        {{>header}}
+        <div class="l-inner py-10">
+            <h1 class="work-log__heading u-border-left">作業ログ</h1>
+
+            <ul id="work-log-list" class="work-log__list py-10"></ul>
 
         <!-- 共通Overlay（ページ最下部に置く） -->
-        <div id="overlay" class="overlay" aria-hidden="true">
+        <!-- <div id="overlay" class="overlay" aria-hidden="true">
             <div class="modal">
                 <button id="closeModal" type="button" class="close-modal"><i class="fa-solid fa-xmark"></i></button>
                 <div id="overlayContent"></div>
             </div>
-        </div>
+        </div> -->
 
     </main>
-    <script type="module" src="/src/assets/scripts/main.js"></script>
+    <script type="module" src="/src/assets/scripts/work-log.js"></script>
 </body>
 
 </html>

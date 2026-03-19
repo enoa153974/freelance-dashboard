@@ -188,6 +188,8 @@ src
 │   │   ├── modules
 │   │   │   ├── flowsViewer.js
 │   │   │   └── rulesViewer.js
+│   │   ├── services
+│   │   │   └── logs.js
 │   │   ├── storage
 │   │   │   └── storage.js
 │   │   ├── ui
@@ -203,11 +205,12 @@ src
 │   │   │   ├── stockTodo.js
 │   │   │   ├── todayLog.js
 │   │   │   └── weather.js
-│   │   └── utils
-│   │       ├── button.js
-│   │       ├── date.js
-│   │       ├── dom.js
-│   │       └── time.js
+│   │   ├── utils
+│   │   │   ├── button.js
+│   │   │   ├── date.js
+│   │   │   ├── dom.js
+│   │   │   └── time.js
+│   │   └── work-log.js
 │   └── styles
 │       ├── base
 │       │   ├── _global.scss
@@ -248,7 +251,9 @@ src
 │           ├── _padding.scss
 │           └── _utilities.scss
 ├── pages
-│   └── hint.html
+│   ├── hint.html
+│   └── work-log
+│       └── index.html
 └── partials
     ├── footer.hbs
     ├── header.hbs

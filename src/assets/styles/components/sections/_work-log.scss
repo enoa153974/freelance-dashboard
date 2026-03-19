@@ -1,0 +1,25 @@
+.work-log {
+
+    .work-date::before {
+        content: "\f073";
+        /* calendar-days */
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        margin-right: 0.5em;
+        color: var(--sub-color);
+    }
+
+    &__list {
+        li {
+            padding-block: 1rem;
+
+            .work-name::before {
+                content: "\f00c";
+                font-family: "Font Awesome 6 Free";
+                font-weight: 900;
+                margin-right: 0.5em;
+                color: var(--main-color);
+            }
+        }
+    }
+}

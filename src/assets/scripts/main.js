@@ -29,6 +29,7 @@ import { collection, addDoc } from "firebase/firestore";
 
 window.addEventListener('DOMContentLoaded', async () => {
     // HTML読み込みが終わったあとに実行される処理
+    if (!document.body.classList.contains('page-home')) return;
     //hamburger();
     //initWeather();
 
@@ -82,33 +83,37 @@ window.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-document.getElementById("openSaveWizard").onclick = () => {
+const btn = document.getElementById("openSaveWizard");
 
-    openOverlay({
-        html: document.getElementById("saveWizardTemplate").innerHTML,
+if (btn) {
+    btn.onclick = () => {
+        openOverlay({
+            html: document.getElementById("saveWizardTemplate").innerHTML,
+            onOpen() {
+                initSaveWizard({
+                    root: document.getElementById("overlayContent")
+                });
+            }
+        });
+    };
+}
 
-        onOpen() {
-            initSaveWizard({
-                root: document.getElementById("overlayContent")
-            });
-        }
-    });
+const rulesBtn = document.getElementById("openRules");
 
+if (rulesBtn) {
+    rulesBtn.onclick = async () => {
+        openOverlay({
+            html: `<pre>${await loadRules()}</pre>`
+        });
+    };
+}
 
-};
+const flowsBtn = document.getElementById("openFlows");
 
-document.getElementById("openRules").onclick = async () => {
-
-    openOverlay({
-        html: `<pre>${await loadRules()}</pre>`
-    });
-
-};
-
-document.getElementById("openFlows").onclick = async () => {
-
-    openOverlay({
-        html: `<pre>${await loadFlows()}</pre>`
-    });
-
-};
+if (flowsBtn) {
+    flowsBtn.onclick = async () => {
+        openOverlay({
+            html: `<pre>${await loadFlows()}</pre>`
+        });
+    };
+}
