@@ -14,7 +14,7 @@ export function initNav() {
             if (!page) return;
 
             navigator.vibrate?.(50);
-            location.href = `/${page}.html`;
+            location.href = `/${page}/`;
         });
     });
 

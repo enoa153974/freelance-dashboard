@@ -209,6 +209,7 @@ src
 │   │   │   ├── button.js
 │   │   │   ├── date.js
 │   │   │   ├── dom.js
+│   │   │   ├── group.js
 │   │   │   └── time.js
 │   │   └── work-log.js
 │   └── styles
@@ -223,7 +224,8 @@ src
 │       │   ├── sections
 │       │   │   ├── _hint-page.scss
 │       │   │   ├── _main-panel.scss
-│       │   │   └── _tool-panel.scss
+│       │   │   ├── _tool-panel.scss
+│       │   │   └── _work-log.scss
 │       │   └── ui
 │       │       ├── _breadcrumb.scss
 │       │       ├── _card.scss
@@ -250,10 +252,6 @@ src
 │           ├── _margin.scss
 │           ├── _padding.scss
 │           └── _utilities.scss
-├── pages
-│   ├── hint.html
-│   └── work-log
-│       └── index.html
 └── partials
     ├── footer.hbs
     ├── header.hbs
