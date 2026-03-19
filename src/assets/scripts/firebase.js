@@ -6,12 +6,12 @@ import { getFirestore } from "firebase/firestore";
 //firebaseに接続するために必要な情報群
 // .env から値を読み込む（Viteは import.meta.env）
 const firebaseConfig = {
-    apiKey: "AIzaSyCSMh42tIevZqZ7iSl6evG2X7JxmRt68KA",
-    authDomain: "household-book-pwa.firebaseapp.com",
-    projectId: "household-book-pwa",
-    storageBucket: "household-book-pwa.firebasestorage.app",
-    messagingSenderId: "896522372306",
-    appId: "1:896522372306:web:f906dd2cc0853c4a3c190b"
+    apiKey: "AIzaSyCtnVEr8zdDkY4WFq1iEQt3QfN07sWbp-A",
+    authDomain: "freelance-dashboard-77ab0.firebaseapp.com",
+    projectId: "freelance-dashboard-77ab0",
+    storageBucket: "freelance-dashboard-77ab0.firebasestorage.app",
+    messagingSenderId: "639198821772",
+    appId: "1:639198821772:web:7d8b570932b86910416aa9"
 };
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
