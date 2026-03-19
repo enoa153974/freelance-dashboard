@@ -173,3 +173,86 @@ utils/
 * 即時同期 ✔
 
 実運用可能レベルの業務管理アプリ基盤が完成。
+
+src
+├── assets
+│   ├── data
+│   │   └── recipes.json
+│   ├── scripts
+│   │   ├── common
+│   │   │   ├── extraTaskManager.js
+│   │   │   └── touchSort.js
+│   │   ├── firebase.js
+│   │   ├── hint.js
+│   │   ├── main.js
+│   │   ├── modules
+│   │   │   ├── flowsViewer.js
+│   │   │   └── rulesViewer.js
+│   │   ├── storage
+│   │   │   └── storage.js
+│   │   ├── ui
+│   │   │   ├── clock.js
+│   │   │   ├── dailyTodo.js
+│   │   │   ├── extraTasks.js
+│   │   │   ├── housework.js
+│   │   │   ├── nav.js
+│   │   │   ├── overlay.js
+│   │   │   ├── saveWizard.js
+│   │   │   ├── sotaIllustPanel.js
+│   │   │   ├── stampPanel.js
+│   │   │   ├── stockTodo.js
+│   │   │   ├── todayLog.js
+│   │   │   └── weather.js
+│   │   └── utils
+│   │       ├── button.js
+│   │       ├── date.js
+│   │       ├── dom.js
+│   │       └── time.js
+│   └── styles
+│       ├── base
+│       │   ├── _global.scss
+│       │   └── _reset.scss
+│       ├── components
+│       │   ├── common
+│       │   │   ├── _footer.scss
+│       │   │   ├── _header.scss
+│       │   │   └── _top-header.scss
+│       │   ├── sections
+│       │   │   ├── _hint-page.scss
+│       │   │   ├── _main-panel.scss
+│       │   │   └── _tool-panel.scss
+│       │   └── ui
+│       │       ├── _breadcrumb.scss
+│       │       ├── _card.scss
+│       │       ├── _gallery-slider.scss
+│       │       ├── _overlay.scss
+│       │       ├── _save-wizard.scss
+│       │       └── _stamp-panel.scss
+│       ├── foundation
+│       │   ├── _function.scss
+│       │   ├── _mixin.scss
+│       │   ├── _variables-custom.scss
+│       │   ├── _variables.scss
+│       │   └── import.scss
+│       ├── layout
+│       │   └── _module.scss
+│       ├── style.scss
+│       └── utility
+│           ├── _button-overrides.scss
+│           ├── _button.scss
+│           ├── _color.scss
+│           ├── _decoration.scss
+│           ├── _font.scss
+│           ├── _link-cover.scss
+│           ├── _margin.scss
+│           ├── _padding.scss
+│           └── _utilities.scss
+├── pages
+│   └── hint.html
+└── partials
+    ├── footer.hbs
+    ├── header.hbs
+    ├── mainpanel.hbs
+    ├── toolpanel.hbs
+    └── ui
+        └── card.hbs

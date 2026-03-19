@@ -86,15 +86,54 @@ export function initTodayLog({
     }
 
 
-    //全削除ボタン
+    //完了済みをログに全保存ボタン
+    // NOTE: ここでfirestoreデータベースにログを格納
     const saveBtn = qs("#completed-log-save", document);
 
-    saveBtn?.addEventListener("click", () => {
+    saveBtn?.addEventListener("click", async () => {
+        const logs = loadStorage("today-log") || [];
+
+        // 🔥 保存可能なログがあるかチェック
+        const hasValid = logs.some(log => log.workTime > 0);
+
+        if (!hasValid) {
+            alert("作業時間が記録されたログがありません");
+            return;
+        }
 
         if (!confirm("完了済みのログをすべて保存しますか？")) return;
 
-        saveTodayToWorkLog();
+        // ① ローディング開始
+        saveBtn.disabled = true;
+        const originalText = saveBtn.textContent;
+        saveBtn.textContent = "保存中...";
 
-        render();
+        try {
+            await saveTodayToWorkLog();
+
+            // ② 成功
+            saveBtn.textContent = "保存完了！";
+
+            // 少しだけ表示してから戻す
+            setTimeout(() => {
+                saveBtn.textContent = originalText;
+                saveBtn.disabled = false;
+            }, 1000);
+
+            render();
+
+        } catch (e) {
+            console.error(e);
+
+            // ③ エラー
+            saveBtn.textContent = "失敗しました";
+
+            setTimeout(() => {
+                saveBtn.textContent = originalText;
+                saveBtn.disabled = false;
+            }, 1500);
+
+            alert("通信エラーが発生しました");
+        }
     });
 }

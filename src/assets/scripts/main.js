@@ -19,6 +19,8 @@ import { openOverlay, initOverlay } from "./ui/overlay.js";
 import { initSaveWizard } from './ui/saveWizard.js';
 import { loadRules } from "./modules/rulesViewer.js";
 import { loadFlows } from "./modules/flowsViewer.js";
+import { db } from './firebase.js';
+import { collection, addDoc } from "firebase/firestore";
 
 //import './switchPanel.js';
 //import './panel.js';
@@ -38,6 +40,8 @@ window.addEventListener('DOMContentLoaded', async () => {
                 .catch(err => console.log("SW error", err));
         });
     }
+
+
 
     initClock();
 

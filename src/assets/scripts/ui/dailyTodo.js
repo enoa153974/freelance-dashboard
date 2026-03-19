@@ -10,6 +10,8 @@ import {
     load as loadStorage,
 } from "../storage/storage.js";
 import { enableTouchSort } from "../common/touchSort.js";
+import { addLog } from "../services/logs.js";
+
 
 // Daily / Stock 間の更新同期に使うカスタムイベント名
 const TODO_UPDATE_EVENT = "todo:updated";
@@ -273,7 +275,7 @@ export function addToDailyTodo({ label, storageKey = "daily-todo" }) {
 // ------------------------------
 // ◆ today-logを保存する関数
 // ------------------------------
-function addTodayLog(todo) {
+export function addTodayLog(todo) {
     const logs = loadStorage("today-log") || [];
 
     logs.push({
@@ -288,15 +290,39 @@ function addTodayLog(todo) {
 
 // ------------------------------
 // ◆ work-logを保存する関数
+//   ここで完了済みのログをfirestoreデータベースに保存する
 // ------------------------------
-export function saveTodayToWorkLog() {
-
+export async function saveTodayToWorkLog() {
     const todayLogs = loadStorage("today-log") || [];
-    const workLogs = loadStorage("work-log") || [];
 
-    const merged = [...workLogs, ...todayLogs];
+    // 🔥 有効なログだけ抽出
+    const validLogs = todayLogs.filter(log => {
+        return log.workTime && log.workTime > 0;
+    });
 
-    saveStorage("work-log", merged);
+    // ❗ 全部無効なら保存しない
+    if (validLogs.length === 0) {
+        alert("有効なログがありません（作業時間が記録されていません）");
+        return;
+    }
 
-    saveStorage("today-log", []);
+    try {
+        await Promise.all(
+            validLogs.map(log =>
+                addLog({
+                    taskName: log.label,
+                    time: log.workTime,
+                    completedAt: log.completedAt
+                })
+            )
+        );
+
+        // 🔥 保存した分だけ削除（←ここ重要）
+        const remainingLogs = todayLogs.filter(log => !validLogs.includes(log));
+        saveStorage("today-log", remainingLogs);
+
+    } catch (e) {
+        console.error("Firestore保存失敗", e);
+        throw e;
+    }
 }

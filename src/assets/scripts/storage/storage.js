@@ -1,3 +1,4 @@
+
 // ==================================================
 // ■ storageへの読み書き処理
 // ==================================================
@@ -13,7 +14,6 @@ export function load(key) {
 }
 
 //localStorageから削除する関数
-
 export function remove(key) {
     localStorage.removeItem(key);
 }
