@@ -119,6 +119,8 @@ export default defineConfig({
                     // その他（画像・フォントなど）
                     return 'assets/[name][extname]';
                 },
+                // HTMLをルートに出す
+                manualChunks: undefined
             },
         },
     },
