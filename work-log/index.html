@@ -45,11 +45,14 @@
         {{>header}}
         <div class="l-inner py-10">
             <h1 class="work-log__heading u-border-left">作業ログ</h1>
-
+            <div class="work-time-total">
+                総作業時間：<span class="work-time-total-amount">0:00:00</span>
+            </div>
             <ul id="work-log-list" class="work-log__list py-10"></ul>
 
-        <!-- 共通Overlay（ページ最下部に置く） -->
-        <!-- <div id="overlay" class="overlay" aria-hidden="true">
+
+            <!-- 共通Overlay（ページ最下部に置く） -->
+            <!-- <div id="overlay" class="overlay" aria-hidden="true">
             <div class="modal">
                 <button id="closeModal" type="button" class="close-modal"><i class="fa-solid fa-xmark"></i></button>
                 <div id="overlayContent"></div>

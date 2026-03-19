@@ -6,6 +6,7 @@ import '../styles/style.scss';
 import { initClock } from './ui/clock.js';
 import { fetchLogs } from './services/logs.js';
 import { groupByDate } from './utils/group.js';
+import { qs } from "./utils/dom.js";
 
 
 
@@ -35,13 +36,14 @@ window.addEventListener('DOMContentLoaded', async () => {
     init();
 
     async function init() {
+        //データベースからlogsを取得
         const logs = await fetchLogs();
 
         render(logs);
     }
 
     /**
-     * 秒 → 時:分:秒
+     * 秒（logs.time）を 変換 →  時:分:秒
      */
     function formatTime(sec) {
         const h = Math.floor(sec / 3600);
@@ -57,32 +59,66 @@ window.addEventListener('DOMContentLoaded', async () => {
     function render(logs) {
         listEl.innerHTML = '';
 
+        //ログがない場合
         if (!logs.length) {
             listEl.innerHTML = '<li>ログがありません</li>';
             return;
         }
 
-        const grouped = groupByDate(logs);
 
+        // ===============================
+        // 🔥 全体合計
+        // ===============================
+        const totalSec = logs.reduce((sum, log) => {
+            return sum + (log.time || 0);
+        }, 0);
+
+        const formattedTotal = formatTime(totalSec);
+
+        const totalEl = qs('.work-time-total-amount', document);
+        if (totalEl) {
+            totalEl.textContent = formattedTotal;
+        }
+
+        //ログをグループ分け
+        const grouped = groupByDate(logs);
         Object.keys(grouped)
-            .sort((a, b) => b.localeCompare(a)) // 新しい日付が上
+            .sort((a, b) => b.localeCompare(a))
             .forEach(date => {
+
+
+
+                // ===============================
+                // 日別合計
+                // ===============================
+                const dayTotalSec = grouped[date].reduce((sum, log) => {
+                    return sum + (log.time || 0);
+                }, 0);
+
+                const formattedDayTotal = formatTime(dayTotalSec);
+
                 const section = document.createElement('li');
 
                 section.innerHTML = `
-                <h3 class="work-date">${date}</h3>
-                <ul>
-                    ${grouped[date].map(log => `
-                        <li>
-                            <strong class="work-name">${log.taskName}</strong>
-                            ⏱ ${formatTime(log.time)}
-                        </li>
-                    `).join('')}
-                </ul>
-            `;
+            <h3 class="work-date">${date}</h3>
+
+            <div class="work-time-daytotal">
+                合計作業時間：<span class="work-time-amount">${formattedDayTotal}</span>
+            </div>
+
+            <ul>
+                ${grouped[date].map(log => `
+                    <li>
+                        <strong class="work-name">${log.taskName}</strong>
+                        ⏱ ${formatTime(log.time)}
+                    </li>
+                `).join('')}
+            </ul>
+        `;
 
                 listEl.appendChild(section);
             });
+
     }
-});
+})
 
