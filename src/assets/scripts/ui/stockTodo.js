@@ -4,6 +4,7 @@
 
 import { addToDailyTodo } from './dailyTodo.js';
 import { save as saveStorage, load as loadStorage } from "../storage/storage.js";
+import { enableTouchSort } from "../common/touchSort.js";
 
 export function initStockTodo({
     listEl,
@@ -14,6 +15,10 @@ export function initStockTodo({
     if (!listEl) return;
 
     let todos = load();
+    //ソート用state
+    const sortState = {
+        isReordering: false,
+    };
 
     render();
 
@@ -68,6 +73,9 @@ export function initStockTodo({
 
             listEl.appendChild(li);
         });
+
+        //並び替え有効化
+        enableTouchSort(listEl, saveOrder, sortState, ".stock-item");
     }
 
     /* =========================
@@ -89,4 +97,19 @@ export function initStockTodo({
     function load() {
         return loadStorage(storageKey) || [];
     }
+}
+
+// ------------------------------
+// ◆ 並び順を管理する関数
+// ------------------------------
+
+function saveOrder() {
+    const items = listEl.querySelectorAll(".stock-item");
+
+    const order = [...items].map(item => item.dataset.id);
+
+    // id順で並び替え
+    todos.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+
+    save();
 }

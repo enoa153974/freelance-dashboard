@@ -12,12 +12,23 @@
         min-height: 500px;
 
         //未達成タスクパネル
-        .stock-item.is-done {
-            opacity: 0.5;
-        }
+        .stock-item {
+            position: relative;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                opacity 0.2s ease,
+                background-color 0.2s ease;
 
-        .stock-item.is-done .stock-label {
-            text-decoration: line-through;
+
+            // 長押しドラッグ中
+            &.is-dragging {
+                z-index: 10;
+                opacity: 0.95;
+                transform: scale(1.02);
+                box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.18);
+                cursor: grabbing;
+            }
         }
 
         .stock-actions {
