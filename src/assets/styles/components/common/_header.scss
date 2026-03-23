@@ -9,12 +9,6 @@
         height: var(--sp-header-height);
     }
 
-    .header__nav {
-
-        @include media-query(md) {
-            display: none;
-        }
-    }
 }
 
 @include media-query(lg) {
@@ -31,21 +25,25 @@
 
 .clock {
     font-size: var(--font-size-4xl);
+
+}
+
+.date.color-text-sub,
+.clock.color-text-sub{
+    @include media-query(md){
+        color: var(--sub-color);
+    }
 }
 
 .date {
     font-size: var(--font-size-base);
 }
 
-.hamburger {
+.header__toggle {
     display: none;
     margin-left: auto;
 
     @include media-query(md) {
         display: flex;
     }
-}
-
-.sp-nav {
-    color: var(--text-color);
 }

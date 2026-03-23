@@ -19,6 +19,7 @@ import { openOverlay, initOverlay } from "./ui/overlay.js";
 import { initSaveWizard } from './ui/saveWizard.js';
 import { loadRules } from "./modules/rulesViewer.js";
 import { loadFlows } from "./modules/flowsViewer.js";
+import { initHamburger } from "./ui/hamburger.js";
 import { db } from './firebase.js';
 import { collection, addDoc } from "firebase/firestore";
 
@@ -30,7 +31,7 @@ import { collection, addDoc } from "firebase/firestore";
 window.addEventListener('DOMContentLoaded', async () => {
     // HTML読み込みが終わったあとに実行される処理
     if (!document.body.classList.contains('page-home')) return;
-    //hamburger();
+
     //initWeather();
 
     // ServiceWorker
@@ -44,6 +45,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 
 
+    initHamburger();
     initClock();
 
     initDailyTodo({

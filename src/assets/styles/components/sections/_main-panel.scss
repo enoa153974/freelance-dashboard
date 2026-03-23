@@ -11,6 +11,7 @@
     .left-panel {
         min-height: 500px;
 
+
         //未達成タスクパネル
         .stock-item {
             position: relative;
@@ -47,6 +48,7 @@
 
     //右パネル【dailyTODO・タスクコントロール・メモinfo】
     .right-panel {
+
 
         //dailyTODOパネル
         .daily-todo {
@@ -143,6 +145,15 @@
                     font-size: var(--font-size-2xl);
                 }
             }
+        }
+    }
+
+    @include media-query(md) {
+
+        .l-column--8,
+        .l-column--6,
+        .l-column--4 {
+            width: 100%;
         }
     }
 }

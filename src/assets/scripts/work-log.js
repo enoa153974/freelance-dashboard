@@ -7,7 +7,7 @@ import { initClock } from './ui/clock.js';
 import { fetchLogs } from './services/logs.js';
 import { groupByDate } from './utils/group.js';
 import { qs } from "./utils/dom.js";
-
+import { initHamburger } from "./ui/hamburger.js";
 
 
 
@@ -26,6 +26,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
 
 
+    initHamburger();
 
     initClock();
 

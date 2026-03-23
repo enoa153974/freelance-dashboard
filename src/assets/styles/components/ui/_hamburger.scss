@@ -1,0 +1,207 @@
+@use "../../foundation/import.scss" as *;
+
+/* =========================
+SP Navigation
+========================= */
+
+@include media-query(md) {
+    // ------------------------------
+    // ◆ハンバーガーボタン 
+    // ------------------------------
+
+
+    .header__toggle {
+        display: block;
+        margin-left: auto;
+        z-index: 2000;
+        position: relative;
+        cursor: pointer;
+        width: 62px;
+        height: 62px;
+    }
+
+    /*ボタン内側*/
+    .header__toggle span {
+        display: inline-block;
+        transition: all 0.4s;
+        position: absolute;
+        left: 10px;
+        height: 2px;
+        border-radius: 2px;
+        background: #000;
+        width: 46%;
+        margin-top: 7px;
+    }
+
+
+    //3本線
+    .header__toggle span:nth-of-type(1) {
+        top: 15px;
+    }
+
+    .header__toggle span:nth-of-type(2) {
+        top: 23px;
+    }
+
+    .header__toggle span:nth-of-type(3) {
+        top: 31px;
+    }
+
+    /*activeクラスが付与されると1・3番目の要素が2番目の要素と同じ位置になり一本線に*/
+
+    .header__toggle.is-active span:nth-of-type(1),
+    .header__toggle.is-active span:nth-of-type(3) {
+        top: 23px;
+    }
+
+    /* ナビ本体 */
+
+    .header__nav {
+
+        position: fixed;
+        top: 0;
+        right: -100%;
+
+        width: 320px;
+        max-width: 85%;
+
+        height: 100vh;
+
+        background: #eee;
+
+        padding: 90px 24px 40px;
+
+        display: flex;
+        flex-direction: column;
+
+        transition: right .4s ease;
+
+        z-index: 1500;
+
+    }
+
+
+    /* 開いた状態 */
+
+    .header__nav.is-open {
+        right: 0;
+
+    }
+
+
+    /* ナビリスト */
+
+    .header__list.color-text-sub{
+
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        color: var(--main-color);
+        width: 100%;
+
+    }
+
+
+    /* メニュー項目 */
+
+    .header__item {
+        width: 100%;
+        white-space: nowrap;
+    }
+
+
+    /* メニューリンク */
+
+    .header__link {
+        display: flex;
+        font-size: var(--font-size-lg);
+        font-weight: 600;
+
+    }
+
+
+    /* サブメニュー */
+
+    .header__mega {
+
+        position: static;
+
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+
+        max-height: 0;
+        overflow: hidden;
+
+        margin-top: 12px;
+
+        transition: max-height .35s ease;
+
+    }
+
+
+    /* アコーディオン開閉 */
+
+    .header__item.open .header__mega {
+        max-height: 400px;
+    }
+
+
+    /* サブリンク */
+
+    .header__sub-link {
+
+        display: block;
+
+        padding: 10px 0;
+
+        font-size: 16px;
+
+    }
+
+
+    /* CTA */
+
+    .header__item--cta {
+
+        margin-top: auto;
+
+    }
+
+    .header__item--cta .c-button {
+        width: 100%;
+        text-align: center;
+    }
+
+    // ------------------------------
+    // ◆ overlay
+    // ------------------------------
+
+    .header__overlay {
+
+        position: fixed;
+        inset: 0;
+
+        background: rgba(0, 0, 0, .4);
+
+        opacity: 0;
+        visibility: hidden;
+
+        transition: opacity .3s;
+
+        z-index: 1400;
+
+    }
+
+    .header__overlay.is-open {
+
+        opacity: 1;
+        visibility: visible;
+
+    }
+
+    body.no-scroll {
+        overflow: hidden;
+    }
+
+}

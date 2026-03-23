@@ -3,26 +3,26 @@
         <div class="header__inner flex w-full">
             <!-- メニュー -->
             <!-- PCナビ -->
-            <nav class="header__nav pc-nav l-row l-row--gap">
+            <nav class="header__nav l-row l-row--gap">
 
                 {{!-- 時計表示 --}}
-                <section class="clock-area l-column l-column--4 flex items-center font-bold ">
+                <section class="clock-area l-column l-column--4 flex items-center font-bold sm:pl-10">
                     <div id="date" class="date en font-semibold text-center color-text-sub">---- --/--</div>
                     <div id="clock" class="clock en text-center pl-4 color-text-sub">00:00</div>
 
                 </section>
 
-                <ul class="header__nav-inner l-row items-center font-bold color-text-sub l-column l-column--8 l-row l-row--gap">
-                    <li class="header__text l-column l-column--3">
+                <ul class="header__list items-center font-bold color-text-sub l-column l-column--8 l-row l-row--gap">
+                    <li class="header__text header__item l-column l-column--3 sm:py-4">
                         <a href="/">Home</a>
                     </li>
-                    <li class="header__text l-column l-column--3">
+                    <li class="header__text header__item l-column l-column--3 sm:py-4">
                         <a href="/work-log/">work-log</a>
                     </li>
-                    <li class="l-column l-column l-column--3">
+                    <li class="header__item l-column l-column l-column--3 sm:py-4">
                         <a href="">sample</a>
                     </li>
-                    <li class="l-column l-column l-column--3">
+                    <li class="header__item l-column l-column l-column--3 sm:py-4">
                         <Button href="リンク" class="header__btn btn btn--push">
                             <span>ボタンテキスト</span>
                         </Button>
@@ -32,19 +32,11 @@
 
 
             <!-- ハンバーガーボタン（SP用） -->
-            <button class="hamburger openbtn" aria-label="メニューを開く">
+            <button class="header__toggle openbtn" aria-label="メニューを開く">
                 <span></span><span></span><span></span>
             </button>
 
-            <!-- スマホナビ -->
-            <nav id="global-nav" class="sp-nav font-bold hidden">
-                <ul>
-                    <li><a href="/">トップ</a></li>
-                    <li> <a href="">sample</a></li>
-                    <li> <a href="">sample</a></li>
-                    <li> <a href="">sample</a></li>
-                </ul>
-            </nav>
         </div>
     </div>
+    <div class="header__overlay"></div>
 </header>
