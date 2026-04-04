@@ -1,3 +1,7 @@
+// ------------------------------
+// ◆ コピーボタン
+// ------------------------------
+
 export function initCopyButtons() {
 
     const buttons = document.querySelectorAll(".copy-btn");

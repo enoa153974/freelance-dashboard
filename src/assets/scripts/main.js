@@ -17,9 +17,8 @@ import { initWorkTimer } from './utils/time.js';
 import { initNav } from './ui/nav.js';
 import { openOverlay, initOverlay } from "./ui/overlay.js";
 import { initSaveWizard } from './ui/saveWizard.js';
-import { loadRules } from "./modules/rulesViewer.js";
-import { loadFlows } from "./modules/flowsViewer.js";
 import { initHamburger } from "./ui/hamburger.js";
+import { loadMarkdown } from "./modules/loadMarkdown.js";
 import { db } from './firebase.js';
 import { collection, addDoc } from "firebase/firestore";
 
@@ -100,22 +99,26 @@ if (btn) {
     };
 }
 
-const rulesBtn = document.getElementById("openRules");
+document.querySelectorAll('[data-md]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+        const path = btn.dataset.md;
 
-if (rulesBtn) {
-    rulesBtn.onclick = async () => {
         openOverlay({
-            html: `<pre>${await loadRules()}</pre>`
-        });
-    };
-}
+            html: '読み込み中...',
+            async onOpen() {
+                const contentEl = document.getElementById("overlayContent");
 
-const flowsBtn = document.getElementById("openFlows");
+                try {
+                    const md = await loadMarkdown(path);
 
-if (flowsBtn) {
-    flowsBtn.onclick = async () => {
-        openOverlay({
-            html: `<pre>${await loadFlows()}</pre>`
+                    // Markdownそのまま or HTML変換
+                    contentEl.innerHTML = marked.parse(md); // ←おすすめ
+                    // contentEl.innerText = md; ←そのまま表示ならこっち
+
+                } catch {
+                    contentEl.innerText = '読み込みに失敗しました';
+                }
+            }
         });
-    };
-}
+    });
+});
