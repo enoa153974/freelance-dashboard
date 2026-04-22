@@ -3,42 +3,47 @@
 <section class="controls">
     <div class="l-inner bg-sub py-4 px-4 l-row l-row--gap sm:flex-col">
         {{! chatGPTボタン }}
-        <button class="btn controls__btn bg-accent" id="btnChatGPT">
+        <button class="btn controls__btn bg-accent hover-move-up" id="btnChatGPT">
             <span></span>
             <i class="fa-solid fa-robot"></i>
             <p>chatGPT</p>
         </button>
 
         {{! 外部ページ移管ボタン ・後で内容書き換え}}
-        <button class="btn controls__btn bg-accent" id="btnAmazon">
+        <button class="btn controls__btn bg-accent hover-move-up" id="btnAmazon">
             <i class="fa-brands fa-amazon"></i>
             <p>Amazon</p>
         </button>
 
-        <button class="btn controls__btn bg-accent" id="btnNotion">
+        <button class="btn controls__btn bg-accent hover-move-up" id="btnNotion">
             <i class="fa-solid fa-note-sticky"></i>
             <p>notion</p>
         </button>
 
-        <button class="btn controls__btn nav-btn bg-accent" data-page="hint">
+        <button class="btn controls__btn nav-btn bg-accent hover-move-up" data-page="hint">
             <i class="fa-regular fa-lightbulb"></i>
             <p>コーディングツール</p>
         </button>
 
+        <button class="btn controls__btn nav-btn bg-accent hover-move-up" id="btnMoney">
+            <i class="fa-solid fa-receipt"></i>
+            <p>経理</p>
+        </button>
+
         {{! 運用ルールボタン：オーバーレイモーダルでmdを表示 }}
-        <button data-md="/docs/freelance_folder_rules.md" class="btn controls__btn nav-btn bg-accent">
+        <button data-md="/docs/freelance_folder_rules.md" class="btn controls__btn nav-btn bg-accent hover-move-up">
             <i class="fa-solid fa-scale-balanced"></i>
             <p>運用ルール</p>
         </button>
 
         {{! 開発フローボタン：オーバーレイモーダルでmdを表示 }}
-        <button data-md="/docs/freelance_dev_flows.md" class="btn controls__btn nav-btn bg-accent">
+        <button data-md="/docs/freelance_dev_flows.md" class="btn controls__btn nav-btn bg-accent hover-move-up">
             <i class="fa-solid fa-diagram-project"></i>
             <p>開発フロー</p>
         </button>
 
         {{! seo対策フローボタン：オーバーレイモーダルでmdを表示 }}
-        <button data-md="/docs/freelance_seo_flows.md" class="btn controls__btn nav-btn bg-accent">
+        <button data-md="/docs/freelance_seo_flows.md" class="btn controls__btn nav-btn bg-accent hover-move-up">
             <i class="fa-solid fa-sitemap"></i>
             <p>seo対策フロー</p>
         </button>

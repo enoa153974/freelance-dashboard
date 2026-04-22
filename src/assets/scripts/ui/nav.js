@@ -40,5 +40,11 @@ export function initNav() {
         location.href = 'https://www.notion.so/HOME-a6846192b45842c4b75dd2df0d6fca17';
     });
 
+        // notion ボタン
+    const moneyBtn = document.getElementById('btnMoney');
+    moneyBtn?.addEventListener('click', () => {
+        navigator.vibrate?.(50);
+        location.href = 'https://accounting.moneyforward.com/home?cti=oiKfOptDLGz3nw7ivcHjog';
+    });
 }
 
